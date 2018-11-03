@@ -18,7 +18,7 @@ public class Bird {
 		y = ConsoleGame.HEIGHT/2;
 		
 	}
-	
+	//Method will make the bird fly/jump. 
 	public void jump() {
 		vy = -8;
 	}
