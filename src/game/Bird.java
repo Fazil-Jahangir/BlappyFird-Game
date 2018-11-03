@@ -1,4 +1,4 @@
-package srcstarter;
+
 
 public class Bird {
 
