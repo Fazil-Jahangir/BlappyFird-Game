@@ -13,24 +13,29 @@ import java.awt.event.KeyListener;
 
 /*
  * The class bird will be in charge of how the bird will behave.
+ * TODO
+ * -Implement the physics class
+ * 
  */
 public class Bird {
 	
-	public float x, y, vx, vy;
+	public float x, y;
+	public float vx, vy;
 	
 	private GOval bird;
-	
+	private Physics p;
 	
 	
 	public Bird()  {
 		// TODO Auto-generated constructor stub
+		
 		x = ConsoleGame.WIDTH/2;
 		y = ConsoleGame.HEIGHT/2;
 		//TEMP Bird will be shape
 		bird = new GOval(0,ConsoleGame.HEIGHT/2,25,25);
 		
 		
-		jump();
+
 		
 		
 		
@@ -38,7 +43,7 @@ public class Bird {
 	}
 	//Method will make the bird fly/jump. 
 	public void jump() {
-		bird.move(50, 50);
+		vy += -8;
 	}
 	
 	//Can use a separate physics class to handle physics.
@@ -46,6 +51,10 @@ public class Bird {
 		x += vx;
 		y += vy;
 		vy += 0.5f;
+		/*float x = p.getX();
+		float y = p.getY();
+		x += vx;
+		y += vy;*/
 		
 	}
 	//Method will reset the bird's location
@@ -55,13 +64,7 @@ public class Bird {
 		vx = vy = 0;
 	}
 	
-	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-		if(e.getKeyCode() == KeyEvent.VK_SPACE) {
-			jump();
-		}
-		
-	}
+	
 	
 
 

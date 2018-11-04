@@ -10,10 +10,12 @@ import javax.swing.JFrame;
  * The main controller of the game. Handles all the key inputs and manages the graphics, bird and *timer*(just for notes)
  * ***TO DO***
  * -Create a new frame for the proper window size 
+ * -Implement a keyboard listener
+ * 
  */
 public class ConsoleGame extends JFrame implements ActionListener, KeyListener{
 	
-	public static final int FPS = 60;
+	//public static final int FPS = 60;
 	public static final int WIDTH = 640;
 	public static final int HEIGHT = 480;
 	
@@ -43,7 +45,7 @@ public class ConsoleGame extends JFrame implements ActionListener, KeyListener{
 	}
 
 
-
+	// Will read keyboard inputs 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
