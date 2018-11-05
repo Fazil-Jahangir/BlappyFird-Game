@@ -12,8 +12,8 @@ public class Bird {
 	private Physics p;
 	
 	// Height and Width are to model the iPhone 6 Plus, rounded up
-	private static final int WINDOW_HEIGHT = 420;
-	private static final int WINDOW_WIDTH= 740;
+	private static final int WINDOW_HEIGHT = 740;
+	private static final int WINDOW_WIDTH= 420;
 	
 	
 	public Bird() 
