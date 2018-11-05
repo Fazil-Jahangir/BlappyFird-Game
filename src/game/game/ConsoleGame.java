@@ -44,7 +44,7 @@ public class ConsoleGame extends GraphicsProgram implements ActionListener, KeyL
 		gameOver = false;
 		
 		//KeyListener listener = new KeyListener();
-		addKeyListener(this);
+		addKeyListeners();
 	}
 	
 	
@@ -85,6 +85,7 @@ public class ConsoleGame extends GraphicsProgram implements ActionListener, KeyL
 
 	public void ActionPerformed(ActionListener e) 
 	{
+		
 		if(paused == false)
 		{
 			b.birdPhysics();
