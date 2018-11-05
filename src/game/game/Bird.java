@@ -16,7 +16,7 @@ public class Bird {
 	private static final int WINDOW_WIDTH= 420;
 	
 	
-	public Bird() 
+	public Bird()
 	{
 		x = ConsoleGame.WIDTH/2;
 		y = ConsoleGame.HEIGHT/2;

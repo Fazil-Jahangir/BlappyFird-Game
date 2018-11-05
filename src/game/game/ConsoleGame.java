@@ -6,13 +6,15 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JFrame;
 import javax.swing.Timer;
+import acm.program.GraphicsProgram;
+import starter.GraphicsPane;
 
 /* The main controller of the game. Handles all the key inputs and manages the graphics, bird and *timer*(just for notes)
  * TODO: 
  * 	Create a JFrame for the proper window size 
  *  Implement a keyboard listener
  */
-public class ConsoleGame extends JFrame implements ActionListener, KeyListener{
+public abstract class ConsoleGame extends GraphicsPane implements ActionListener, KeyListener{
 	
 	//public static final int FPS = 60;
 	public static final int WIDTH = 640;
@@ -71,7 +73,7 @@ public class ConsoleGame extends JFrame implements ActionListener, KeyListener{
 	}
 
 
-	// Will read keyboard inputs 
+	// keyPressed() reads keyboard inputs 
 	@Override
 	public void keyPressed(KeyEvent e) 
 	{
