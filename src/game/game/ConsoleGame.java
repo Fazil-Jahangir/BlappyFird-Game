@@ -26,7 +26,7 @@ public class ConsoleGame extends GraphicsProgram implements ActionListener, KeyL
 	private static final int WINDOW_HEIGHT = 740;
 	private static final int WINDOW_WIDTH = 620;
 	private static final int BIRD_SIZE = 50;
-	private static final int BIRD_OFFSET_X= 10;
+	private static final int BIRD_OFFSET_X= 80;
 	private static final int BIRD_OFFSET_Y= 300;
 	
 	public void run()
@@ -35,7 +35,10 @@ public class ConsoleGame extends GraphicsProgram implements ActionListener, KeyL
 		
 		clock.start();
 		
-		bird = new GOval(BIRD_OFFSET_X, BIRD_OFFSET_Y, BIRD_SIZE, BIRD_SIZE);
+		bird = new GOval(BIRD_OFFSET_X, BIRD_OFFSET_Y, BIRD_SIZE, BIRD_SIZE);	
+		
+		b = new Bird();
+		
 		add(bird);
 		
 		scoreCounter = 0;
@@ -45,29 +48,6 @@ public class ConsoleGame extends GraphicsProgram implements ActionListener, KeyL
 		
 		//KeyListener listener = new KeyListener();
 		addKeyListeners();
-	}
-	
-	
-	@Override
-	public void keyPressed(KeyEvent e) 
-	{
-		//printEventInfo("Key pressed", e);
-		System.out.println(e);
-        
-        /*
-		
-		// TODO Auto-generated method stub
-		if(e.getKeyCode() == KeyEvent.VK_SPACE) 
-		{
-			b.birdJump();
-		}
-		else if(e.getKeyCode() == KeyEvent.VK_ESCAPE) 
-		{
-			paused = true;
-		}
-		
-		*/
-		
 	}
 	
 	/* TODO: Test out   the gravity multipliers
@@ -82,36 +62,52 @@ public class ConsoleGame extends GraphicsProgram implements ActionListener, KeyL
 			gameOver = true;
 		}
 	}
-
-	public void ActionPerformed(ActionListener e) 
-	{
-		
-		if(paused == false)
-		{
-			b.birdPhysics();
-		}
-	}
-
 	
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
+		/* TODO: 
+		 * draw pillars here
+		 */
+		
+		//System.out.println("actionPerformed called");
+		
+		if (paused == false)
+		{
+			b.birdPhysics();
+		}
+	}
+	
+	@Override
+	public void keyPressed(KeyEvent e) 
+	{
+		//System.out.println(e);
+  
+		// TODO Auto-generated method stub
+		if (e.getKeyCode() == KeyEvent.VK_SPACE) 
+		{
+			b.birdJump();
+		}
+		else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) 
+		{
+			System.out.println("paused = true set, esc button pressed");
+			paused = true;
+		}
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) 
+	{
 		// TODO Auto-generated method stub
 	}
+	
 
 	@Override
 	public void keyTyped(KeyEvent e) 
 	{
 		// TODO Auto-generated method stub
 		
-	}
-
-	// keyPressed() reads keyboard inputs
-
-	@Override
-	public void keyReleased(KeyEvent e) 
-	{
-		// TODO Auto-generated method stub
 	}
 	
 	public int getScore() {
