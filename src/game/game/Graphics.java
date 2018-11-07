@@ -35,6 +35,53 @@ public class Graphics
 		program.add(img);
 	}
 	
+	//Setters:
+	public void changeLocation(int xLoc, int yLoc)
+	{
+		img.setLocation(xLoc, yLoc);
+	}
+	
+	public void setFileLocation(String fileLocation) 
+	{
+		this.fileLocation = fileLocation;
+	}
+	
+	public void setHeight(int height) 
+	{
+		this.height = height;
+	}
+	
+	public void setWidth(int width) 
+	{
+		this.width = width;
+	}
+
+	//Getters:
+	public String getfileLocation() 
+	{
+		return fileLocation;
+	}
+	
+	public double getX() 
+	{
+		return img.getX();
+	}
+	
+	public double getY() 
+	{
+		return img.getY();
+	}
+	
+	public int getHeight() 
+	{
+		return height;
+	}
+	
+	public int getWidth() 
+	{
+		return width;
+	}	
+	
 	/*
 	@Override
 	public void showContents() 
