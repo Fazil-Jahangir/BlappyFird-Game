@@ -26,18 +26,17 @@ public class ConsoleGame extends GraphicsProgram implements ActionListener
     private static final int BIRD_POSITION_X = 210;
     private static int BIRD_POSITION_Y = 300;
     
-    private Graphics robot = new Graphics("robot head.jpg", 100, 100, WINDOW_HEIGHT, WINDOW_WIDTH);
+    private Graphics background = new Graphics("background.png", 0, 0, WINDOW_HEIGHT, WINDOW_WIDTH);
 
     public void run() 
     {
         timer = new Timer(100, this);
 
+        drawBackground();
         birdOval = new GOval(BIRD_POSITION_X, BIRD_POSITION_Y, BIRD_SIZE, BIRD_SIZE);
         birdOval.setFillColor(Color.green);
         birdOval.setFilled(true);
         add(birdOval);
-        robot.draw(this);
-
         addKeyListeners();
 
         timer.start();
@@ -45,7 +44,7 @@ public class ConsoleGame extends GraphicsProgram implements ActionListener
     
     public void drawBackground()
     {
-    	
+        background.draw(this);
     }
 
     public void birdJump() 
