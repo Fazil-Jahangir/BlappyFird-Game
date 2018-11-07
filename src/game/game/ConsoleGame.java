@@ -32,10 +32,14 @@ public class ConsoleGame extends GraphicsProgram implements ActionListener
     
     public void run() 
     {
+    	createPipes();
+        drawBackground();
+        drawPipes();
+    	
         timer = new Timer(100, this);
         timer.start();
 
-        drawBackground();
+
         drawBird();
         addKeyListeners();
         
@@ -57,11 +61,28 @@ public class ConsoleGame extends GraphicsProgram implements ActionListener
         bird.draw(this);
     }
     
-    public void createPipes()
+    public void drawPipes()
     {
     	for(int i = 0; i < pipes.length; i++)
     	{
-    		//pipes[i] = new Graphics()
+    		pipes[i].draw(this);
+    	}
+    }
+    
+    public void createPipes()
+    {
+    	int x = 100;
+    	for(int i = 0; i < pipes.length; i++)
+    	{
+    		if(i % 2 == 0)
+    		{
+    			pipes[i] = new Graphics("pipeUp.png", x, 500, WINDOW_HEIGHT, WINDOW_WIDTH);	
+    		}
+    		else
+    		{
+    			pipes[i] = new Graphics("pipeDown.png", x, -100, WINDOW_HEIGHT, WINDOW_WIDTH);
+    		}
+    		x += 200;
     	}
     }
 
