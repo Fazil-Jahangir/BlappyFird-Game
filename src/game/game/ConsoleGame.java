@@ -27,7 +27,7 @@ public class ConsoleGame extends GraphicsProgram implements ActionListener
     private static int BIRD_POSITION_Y = 300;
     
     private Graphics background = new Graphics("background.png", 0, 0, WINDOW_HEIGHT, WINDOW_WIDTH);
-    private Graphics bird = new Graphics("bird.png", 210, 300, WINDOW_HEIGHT, WINDOW_WIDTH);
+    private Graphics bird = new Graphics("flappy-bird.png", 210, 300, WINDOW_HEIGHT, WINDOW_WIDTH);
     
     public void run() 
     {
