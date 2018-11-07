@@ -62,19 +62,6 @@ public class Bird {
 		xspeed = yspeed = 0;
 	}
 	
-	
-	/* TODO: Add the bird to 0,0 location,
-	 * we may need to think about using an 
-	 * instance variable here
-	 */
-	public void draw(Graphics temp)
-	{
-		ImageIcon birdPic = new ImageIcon("path-location");
-
-		// TODO: Get Bird picture
-		//temp.drawImage(birdPic.getImage(), 0, 0, null);
-	}
-	
 	public float getX() {
 		return x;
 	}

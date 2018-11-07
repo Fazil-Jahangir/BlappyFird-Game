@@ -10,7 +10,11 @@ import acm.graphics.GLabel;
 import acm.graphics.GOval;
 import acm.program.GraphicsProgram;
 
-public class ConsoleGame extends GraphicsProgram implements ActionListener {
+public class ConsoleGame extends GraphicsProgram implements ActionListener 
+{
+    private static final int WINDOW_HEIGHT = 740;
+    private static final int WINDOW_WIDTH = 620;
+
     private GOval birdOval;
     private Timer timer;
 
@@ -18,32 +22,37 @@ public class ConsoleGame extends GraphicsProgram implements ActionListener {
     private boolean paused;
     private int yMovement;
 
-    private static final int WINDOW_HEIGHT = 740;
-    private static final int WINDOW_WIDTH = 620;
-
     private static int BIRD_SIZE = 50;
     private static final int BIRD_POSITION_X = 210;
     private static int BIRD_POSITION_Y = 300;
+    
+    private Graphics robot = new Graphics("robot head.jpg", 100, 100, WINDOW_HEIGHT, WINDOW_WIDTH);
 
-    public void run() {
+    public void run() 
+    {
         timer = new Timer(100, this);
 
         birdOval = new GOval(BIRD_POSITION_X, BIRD_POSITION_Y, BIRD_SIZE, BIRD_SIZE);
         birdOval.setFillColor(Color.green);
         birdOval.setFilled(true);
         add(birdOval);
+        robot.draw(this);
 
         addKeyListeners();
 
         timer.start();
     }
+    
+    public void drawBackground()
+    {
+    	
+    }
 
-    public void birdJump() {
+    public void birdJump() 
+    {
         System.out.println("	jump() called\n");
-
         // Move the bird upwards
         yMovement -= 100;
-
         // Update the bird's location
         birdOval.setLocation(BIRD_POSITION_X, BIRD_POSITION_Y + yMovement);
     }
@@ -65,7 +74,7 @@ public class ConsoleGame extends GraphicsProgram implements ActionListener {
              * here, constantly pushing the bird down towards
              * the ground
              */
-            yMovement += 30;
+            yMovement += 5;
 
             // Update the bird's location now
             birdOval.setLocation(BIRD_POSITION_X,  BIRD_POSITION_Y + yMovement);
