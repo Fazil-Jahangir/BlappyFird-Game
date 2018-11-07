@@ -13,7 +13,7 @@ import acm.program.GraphicsProgram;
 public class ConsoleGame extends GraphicsProgram implements ActionListener 
 {
     private static final int WINDOW_HEIGHT = 740;
-    private static final int WINDOW_WIDTH = 620;
+    private static final int WINDOW_WIDTH = 1024;
 
     //private GOval birdOval;
     private Timer timer;
@@ -28,6 +28,7 @@ public class ConsoleGame extends GraphicsProgram implements ActionListener
     
     private Graphics background = new Graphics("background.png", 0, 0, WINDOW_HEIGHT, WINDOW_WIDTH);
     private Graphics bird = new Graphics("flappy-bird.png", 210, 300, WINDOW_HEIGHT, WINDOW_WIDTH);
+    private Graphics[] pipes = new Graphics[4];
     
     public void run() 
     {
@@ -54,6 +55,14 @@ public class ConsoleGame extends GraphicsProgram implements ActionListener
     public void drawBird()
     {
         bird.draw(this);
+    }
+    
+    public void createPipes()
+    {
+    	for(int i = 0; i < pipes.length; i++)
+    	{
+    		//pipes[i] = new Graphics()
+    	}
     }
 
     public void birdJump() 
