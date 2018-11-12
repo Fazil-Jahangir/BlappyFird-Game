@@ -102,6 +102,7 @@ public class ConsoleGame extends GraphicsProgram implements ActionListener
         //System.out.println("actionPerformed() called");
 
     	// Validate if the bird hit the bottom of the screen
+    	// Will end game if the bird hits the very top of the screen
     	//if (birdOval.getY() >= WINDOW_HEIGHT)
     	if (bird.getY() >= WINDOW_HEIGHT)
         {
