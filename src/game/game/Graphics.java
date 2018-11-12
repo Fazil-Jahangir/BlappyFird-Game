@@ -1,9 +1,5 @@
 package game;
-import javax.swing.*;
 import acm.graphics.GImage;
-import starter.MainApplication;
-
-import java.awt.*;
 
 public class Graphics 
 {
