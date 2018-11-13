@@ -22,6 +22,7 @@ public class ConsoleGame extends GraphicsProgram implements ActionListener
     private boolean gameEnded;
     private boolean paused;
     private int yMovement;
+    private int pipeSpeed = 2;
     
 
     private static int BIRD_SIZE = 50;
@@ -131,9 +132,10 @@ public class ConsoleGame extends GraphicsProgram implements ActionListener
              * here, constantly pushing the bird down towards
              * the ground
              */
+
             yMovement += 5;
             //TEST
-           
+            movePipeImages();
             // Update the bird's location now
             //birdOval.setLocation(BIRD_POSITION_X,  BIRD_POSITION_Y + yMovement);
             bird.changeLocation(BIRD_POSITION_X,  BIRD_POSITION_Y + yMovement);
@@ -225,12 +227,18 @@ public class ConsoleGame extends GraphicsProgram implements ActionListener
     }
     
     //***********************TEST*************************
-    /*public void movePipeImages() {
+    /*
+     * Method controls the movements of the pipes. The pipes will slowly move to the left of the screen
+     * TODO
+     * Remove pipes
+     */
+    public void movePipeImages() {
     	for(Graphics p:pipes) {
-    		p.changeLocation(p.getX(), p.getY());
+    		p.changeLocation((int)p.getX()-pipeSpeed, (int)p.getY());
+
     	}
     	
-    }*/
+    }
     
     public void init() 
     {
