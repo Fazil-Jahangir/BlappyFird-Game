@@ -36,7 +36,7 @@ public class Graphics
 	{
 		img.setLocation(xLoc, yLoc);
 	}
-	
+		
 	public void setFileLocation(String fileLocation) 
 	{
 		this.fileLocation = fileLocation;

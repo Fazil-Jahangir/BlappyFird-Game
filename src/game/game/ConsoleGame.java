@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import javax.swing.Timer;
+import acm.util.RandomGenerator;
 
 import acm.graphics.GLabel;
 import acm.graphics.GOval;
@@ -21,6 +22,8 @@ public class ConsoleGame extends GraphicsProgram implements ActionListener
     private boolean gameEnded;
     private boolean paused;
     private int yMovement;
+    private int pipeSpeed = 2;
+    
 
     private static int BIRD_SIZE = 50;
     private static final int BIRD_POSITION_X = 210;
@@ -29,9 +32,12 @@ public class ConsoleGame extends GraphicsProgram implements ActionListener
     private Graphics background = new Graphics("background.png", 0, 0, WINDOW_HEIGHT, WINDOW_WIDTH);
     private Graphics bird = new Graphics("flappy-bird.png", 210, 300, WINDOW_HEIGHT, WINDOW_WIDTH);
     private Graphics[] pipes = new Graphics[4];
+    private RandomGenerator rgen;
     
     public void run() 
     {
+    	//Seth added rgen = RandomGenerator.getInstance(); For some reason, this needs to be called in order for it to work. Took it from TimersLab
+    	rgen = RandomGenerator.getInstance();
     	createPipes();
         drawBackground();
         drawPipes();
@@ -71,16 +77,25 @@ public class ConsoleGame extends GraphicsProgram implements ActionListener
     
     public void createPipes()
     {
+    	
     	int x = 100;
     	for(int i = 0; i < pipes.length; i++)
     	{
+    		/*
+    		 * rgen is the random number generator. We may have to do more testing to find the right values. rgen.nextInt(low number, high number) if you guys
+    		 * want to change the values. Be sure it's in that format. 
+    		 */
     		if(i % 2 == 0)
     		{
-    			pipes[i] = new Graphics("pipeUp.png", x, 500, WINDOW_HEIGHT, WINDOW_WIDTH);	
+    			//OLD CODE
+    			//pipes[i] = new Graphics("pipeUp.png", x, 500, WINDOW_HEIGHT, WINDOW_WIDTH);
+    			pipes[i] = new Graphics("pipeUp.png", x, rgen.nextInt(300, 500), WINDOW_HEIGHT, WINDOW_WIDTH);	
     		}
     		else
     		{
-    			pipes[i] = new Graphics("pipeDown.png", x, -100, WINDOW_HEIGHT, WINDOW_WIDTH);
+    			//OLD CODE
+    			//pipes[i] = new Graphics("pipeDown.png", x, -100, WINDOW_HEIGHT, WINDOW_WIDTH);
+    			pipes[i] = new Graphics("pipeDown.png", x, rgen.nextInt(0, 100), WINDOW_HEIGHT, WINDOW_WIDTH);
     		}
     		x += 200;
     	}
@@ -117,8 +132,10 @@ public class ConsoleGame extends GraphicsProgram implements ActionListener
              * here, constantly pushing the bird down towards
              * the ground
              */
-            yMovement += 5;
 
+            yMovement += 5;
+            //TEST
+            movePipeImages();
             // Update the bird's location now
             //birdOval.setLocation(BIRD_POSITION_X,  BIRD_POSITION_Y + yMovement);
             bird.changeLocation(BIRD_POSITION_X,  BIRD_POSITION_Y + yMovement);
@@ -208,7 +225,21 @@ public class ConsoleGame extends GraphicsProgram implements ActionListener
             }
         }
     }
+    
+    //***********************TEST*************************
+    /*
+     * Method controls the movements of the pipes. The pipes will slowly move to the left of the screen
+     * TODO
+     * Remove pipes
+     */
+    public void movePipeImages() {
+    	for(Graphics p:pipes) {
+    		p.changeLocation((int)p.getX()-pipeSpeed, (int)p.getY());
 
+    	}
+    	
+    }
+    
     public void init() 
     {
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
