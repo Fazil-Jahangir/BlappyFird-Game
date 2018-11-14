@@ -133,7 +133,7 @@ public class ConsoleGame extends GraphicsProgram implements ActionListener
              * the ground
              */
 
-            yMovement += 5;
+            yMovement += 9;
             //TEST
             movePipeImages();
             // Update the bird's location now
@@ -232,10 +232,15 @@ public class ConsoleGame extends GraphicsProgram implements ActionListener
      * TODO
      * Remove pipes
      */
-    public void movePipeImages() {
-    	for(Graphics p:pipes) {
+    public void movePipeImages() 
+    {
+    	for(Graphics p:pipes) 
+    	{
     		p.changeLocation((int)p.getX()-pipeSpeed, (int)p.getY());
-
+    		if(p.getX() == 0)
+    		{
+    			p.hideContents();
+    		}
     	}
     	
     }

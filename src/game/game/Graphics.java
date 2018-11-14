@@ -28,7 +28,7 @@ public class Graphics
 	{
 		this.program = app;
 		img = new GImage(fileLocation, x, y);
-		program.add(img);
+		showContents();
 	}
 	
 	//Setters:
@@ -78,17 +78,13 @@ public class Graphics
 		return width;
 	}	
 	
-	/*
-	@Override
 	public void showContents() 
 	{
 		program.add(img);
 	}
 
-	@Override
 	public void hideContents() 
 	{
 		program.remove(img);
 	}
-	*/
 }
