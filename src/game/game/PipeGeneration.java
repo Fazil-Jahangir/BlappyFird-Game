@@ -40,15 +40,8 @@ public class PipeGeneration extends GraphicsProgram implements ActionListener {
 		// System.out.println(NUMTIME);
 		if (numTime % 100 == 0) {
 			drawPipes();
-			for(Graphics p : pipes) {
-				System.out.println("x: " + p.getX() + "size: " + pipes.size());
-				p.changeLocation((int) p.getX() - pipeSpeed, (int) p.getY());
-				
-			}
-			
 		}
 		movePipeImages();
-		
 	}
 
 	public void init() {
