@@ -13,7 +13,7 @@ import acm.program.GraphicsProgram;
 
 public class ConsoleGame extends GraphicsProgram implements ActionListener 
 {
-    private static final int WINDOW_HEIGHT = 740;
+    private static final int WINDOW_HEIGHT = 576;
     private static final int WINDOW_WIDTH = 1024;
 
     //private GOval birdOval;
@@ -36,7 +36,7 @@ public class ConsoleGame extends GraphicsProgram implements ActionListener
     
     public void run() 
     {
-    	//Seth added rgen = RandomGenerator.getInstance(); For some reason, this needs to be called in order for it to work. Took it from TimersLab
+    	
     	rgen = RandomGenerator.getInstance();
     	createPipes();
         drawBackground();
@@ -241,6 +241,7 @@ public class ConsoleGame extends GraphicsProgram implements ActionListener
     		{
     			p.hideContents();
     		}
+    		
     	}
     	
     }

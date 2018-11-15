@@ -10,6 +10,7 @@ public class Graphics
 	private int height;
 	private GImage img;
 	private ConsoleGame program;
+	private PipeGeneration pg;
 	
 	public Graphics(String fileLocation, int x, int y, int height, int width) 
 	{
@@ -30,6 +31,15 @@ public class Graphics
 		img = new GImage(fileLocation, x, y);
 		showContents();
 	}
+	
+	//PipeGeneration Draw Test
+	public void draw(PipeGeneration p)
+	{
+		this.pg = p;
+		img = new GImage(fileLocation, x, y);
+		showContentsPipe();
+	}
+	
 	
 	//Setters:
 	public void changeLocation(int xLoc, int yLoc)
@@ -81,6 +91,11 @@ public class Graphics
 	public void showContents() 
 	{
 		program.add(img);
+	}
+	
+	public void showContentsPipe() 
+	{
+		pg.add(img);
 	}
 
 	public void hideContents() 
