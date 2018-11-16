@@ -1,80 +1,82 @@
 package game;
 
 import javax.swing.*;
+import acm.program.GraphicsProgram;
 
 /*
- * The Bird class will be in charge of the bird's behavior
+ * The Bird class will be in charge of the bird's behavior and graphics
+ * TODO
+ * Make another enum class to choose different skins. *DO LATER*
  */
-public class Bird {
+public class Bird extends GraphicsProgram {
 	
-	public float x, y;
-	public float xspeed, yspeed;
-	private Physics p;
-	
-	// Height and Width are to model the iPhone 6 Plus, rounded up
-	private static final int WINDOW_HEIGHT = 740;
-	private static final int WINDOW_WIDTH = 620;
-	
-	
-	public Bird()
-	{
-		x = ConsoleGame.WIDTH/2;
-		y = ConsoleGame.HEIGHT/2;
-		
+	//Declarations
+	//public float x, y;
+	//public float xspeed, yspeed;
+	private Physics p = new Physics();
+	private GameTest program;
+	private Graphics g;
+
+	//Screen Dimensions for Bird scaling
+	private static final int WINDOW_HEIGHT = 576;
+	private static final int WINDOW_WIDTH = 1024;
+
+	public Bird(GameTest app) {
+		program = app;
 	}
 	
-	/* birdJump() will make the bird fly/jump. 
-	 * All that should be needed here is an downwards
-	 * motion, hence yspeed iteration down. The bird will
-	 * start falling down as gravity acts upon it
-	 */
-	public void birdJump() 
-	{
-		yspeed += 0;
+	public void drawBird() {
+		g = createBird();
+		g.draw(program);
+		System.out.println("TEST BIRD DRAW");
 	}
 	
 	/*
-	 * The plan of attack in birdPhysics() is to simply create
-	 * and use two instance variables, x/y, xspeed/yspeed, which
-	 * both interact to determine initial location which then
-	 * is added by the xspeed and yspeed multiplier
+	 * TODO
+	 * -Make the file flexible, doesn't have to always be the 'flappy bird'. Players should be able to choose what character they want to be.
 	 */
-	
-	// TODO: Implement PVector in birdPhysics() instead of integers
-	// https://processing.org/tutorials/pvector/
-	public void birdPhysics() 
-	{
-		// Original position is incremented by speed multiplier
-		x += xspeed;
-		y += yspeed;
-		
-		/* TODO: Test out the y-speed below, which
-		 * will act as the downward gravity upon the bird
-		 */
-		yspeed += 0;
+	public Graphics createBird() {
+		Graphics temp;
+		temp = new Graphics("flappy-bird.png", 150, 250, WINDOW_HEIGHT, WINDOW_WIDTH);
+		return temp;
+	}
+
+	/*
+	 * birdJump() will make the bird fly/jump. All that should be needed here is an
+	 * downwards motion. It pull the birdJump method created in the Physic's class. 
+	 */
+	public void birdJump() {
+		p.birdJump();
+		g.changeFloatLocation(p.getX(), p.getY());
+		System.out.println("BIRD JUMP");
+	}
+
+	/*
+	 * 
+	 * 
+	 */
+
+	//MEthod will be in charge of 
+	public void birdPhysics() {
+		p.birdPhysics();
+		g.changeFloatLocation(p.getX(), p.getY());
+
 	}
 	
+	public float birdGetY() {
+		System.out.println("Y VALUE: " + p.y);
+		return p.y;
+	}
+
 	// resetBirdLocation() will reset the bird's location to original
-	public void resetBirdLocation() 
-	{
-		x = WINDOW_HEIGHT/2;
-		y = WINDOW_WIDTH/2;
+	/*public void resetBirdLocation() {
+		x = WINDOW_HEIGHT / 2;
+		y = WINDOW_WIDTH / 2;
 		xspeed = yspeed = 0;
-	}
+	}*/
 	
-	public float getX() {
-		return x;
-	}
 	
-	public float getY() {
-		return y;
-	}
 	
-	public void setX(float x) {
-		this.x = x;
-	}
+
 	
-	public void setY(float y) {
-		this.y = y;
-	}
 }
