@@ -6,13 +6,10 @@ public class Graphics
 	private String fileLocation;
 	private int x;
 	private int y;
-	private float vx;
-	private float vy;
 	private int width;
 	private int height;
 	private GImage img;
 	private ConsoleGame program;
-	private PipeGeneration pg;
 	private GameTest game;
 	
 	public Graphics(String fileLocation, int x, int y, int height, int width) 
@@ -23,14 +20,6 @@ public class Graphics
 		this.height = height;
 		this.width = width;
 	}
-	/*public Graphics(String fileLocation, float x, float y, int height, int width) 
-	{
-		this.fileLocation = fileLocation;
-		vx = x;
-		vy = y;
-		this.height = height;
-		this.width = width;
-	}*/
 	
 	/* TODO: Add the bird to 0,0 location,
 	 * we may need to think about using an 
@@ -43,14 +32,6 @@ public class Graphics
 		showContents();
 	}
 	
-	//PipeGeneration Draw Test
-	public void draw(PipeGeneration p)
-	{
-		this.pg = p;
-		img = new GImage(fileLocation, x, y);
-		showContentsPipe();
-	}
-	
 	//GameTest
 	public void draw(GameTest g)
 	{
@@ -61,7 +42,7 @@ public class Graphics
 	
 	
 	//Setters:
-	public void changeLocation(int xLoc, int yLoc)
+	public void changeLocation(double xLoc, double yLoc)
 	{
 		img.setLocation(xLoc, yLoc);
 	}
@@ -116,13 +97,10 @@ public class Graphics
 	{
 		program.add(img);
 	}
+	
 	//TEST
-	public void showContentsPipe() 
+	public void showContentsGame() 
 	{
-		pg.add(img);
-	}
-	//TEST
-	public void showContentsGame() {
 		game.add(img);
 	}
 

@@ -13,9 +13,8 @@ import acm.program.GraphicsProgram;
  * -Convert the methods to work with the CONSOLEGAME. As of right now, it works with the test demo I created. (Seth)
  */
 
-public class PipeGeneration extends GraphicsProgram {
-
-	
+public class PipeGeneration extends GraphicsProgram 
+{	
 	//Window Dimensions
 	private static final int WINDOW_HEIGHT = 576;
 	private static final int WINDOW_WIDTH = 1024;
@@ -34,7 +33,8 @@ public class PipeGeneration extends GraphicsProgram {
 	
 
 	//Constructor
-	public PipeGeneration(GameTest app) {
+	public PipeGeneration(GameTest app) 
+	{
 		program = app;
 		rgen = RandomGenerator.getInstance();
 		pipes = new ArrayList<Graphics>();
@@ -43,7 +43,8 @@ public class PipeGeneration extends GraphicsProgram {
 	 * Method will generate pipes throughout the map. Spawning is currently set as 1 UP facing pipe then 1 DOWN facing pipe then 
 	 * repeat. Although it's not spawning randomly, it can be changed by updating the "x" value or changing it entirely.
 	 */
-	public Graphics createPipes() {
+	public Graphics createPipes() 
+	{
 		//Controls spawn behavior
 		Graphics temp;
 		int imgY;
@@ -79,14 +80,15 @@ public class PipeGeneration extends GraphicsProgram {
 	 * Probably needs to be set in float or double to have a smoother movement.
 	 * 
 	 */
-	public void movePipeImages() {
-		for (Graphics p : pipes) {
+	public void movePipeImages() 
+	{
+		for (Graphics p : pipes) 
+		{
 			System.out.println("x: " + p.getX() + "size: " + pipes.size());
 			p.changeLocation((int) p.getX() - pipeSpeed, (int) p.getY());
 			p.changeFloatLocation((float)p.getX() - pipeSpeed, (float)p.getY());
 		}
 		System.out.println("TEST MOVEMENT");
-
 	}
 	
 	

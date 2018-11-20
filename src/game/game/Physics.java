@@ -15,8 +15,8 @@ public class Physics {
 	
 	//Constructor for physics. Values also determine the starting position of the bird as well. 
 	public Physics() {
-		x = 150;
-		y = 250;
+		x = 100;
+		y = 100;
 	}
 	
 	//Getters
@@ -38,7 +38,8 @@ public class Physics {
 	}
 	
 	//Controls the jumping/flying action for the bird
-	public void birdJump() {
+	public void birdJump() 
+	{
 		vy = -8;
 	}
 	
