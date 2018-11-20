@@ -16,6 +16,16 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>media/1.TTF</name>
+			<type>1</type>
+			<location>C:/Users/Owner/Desktop/Images/1.TTF</location>
+		</link>
+		<link>
+			<name>media/8.ttf</name>
+			<type>1</type>
+			<location>C:/Users/Owner/Desktop/Images/8.ttf</location>
+		</link>
+		<link>
 			<name>media/background1.png</name>
 			<type>1</type>
 			<location>C:/Users/Owner/Desktop/Images/background2.png</location>
@@ -24,6 +34,21 @@
 			<name>media/background2.png</name>
 			<type>1</type>
 			<location>C:/Users/Owner/Desktop/Images/background1.png</location>
+		</link>
+		<link>
+			<name>media/menu.png</name>
+			<type>1</type>
+			<location>C:/Users/Owner/Desktop/Images/menu.png</location>
+		</link>
+		<link>
+			<name>media/menu1.png</name>
+			<type>1</type>
+			<location>C:/Users/Owner/Desktop/Images/menu1.png</location>
+		</link>
+		<link>
+			<name>media/menu3.png</name>
+			<type>1</type>
+			<location>C:/Users/Owner/Desktop/Images/menu3.png</location>
 		</link>
 	</linkedResources>
 </projectDescription>
