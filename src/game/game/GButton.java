@@ -22,12 +22,13 @@ public class GButton extends GCompound
 	public GButton(String label, double x, double y, double width, double height) 
 	{
 		this(label, x, y, width, height, Color.BLACK);
+		/*
 		try {
 		    //create the font to use. Specify the size!
-		    customFont = Font.createFont(Font.TRUETYPE_FONT, new File("1.ttf")).deriveFont(30f);
+		    customFont = Font.createFont(Font.TRUETYPE_FONT, new File("8.ttf")).deriveFont(30f);
 		    GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		    //register the font
-		    ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("1.ttf")));
+		    ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("8.ttf")));
 		} 
 		catch (IOException e) 
 		{
@@ -35,7 +36,8 @@ public class GButton extends GCompound
 		} catch(FontFormatException e) 
 		{
 		    e.printStackTrace();
-		}				
+		}
+		*/				
 	}
 	
 	public GButton(String label, double x, double y, double width, double height, Color col) 
@@ -73,6 +75,8 @@ public class GButton extends GCompound
 	
 	public void setCustomFont()
 	{
-		message.setFont(customFont);
+		//message.setFont(customFont);
+		//message.setFont(new Font("Castellar", Font.BOLD, 35));
+		message.setFont(new Font("Showcard Gothic", Font.BOLD, 35));	
 	}	
 }

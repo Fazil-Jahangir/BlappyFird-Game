@@ -72,7 +72,7 @@ public class MenuPane extends GraphicsPane
 		}
 		if (obj == gButtons.get(3)) 
 		{
-			//program.switchToCredits();
+			program.switchToSettings();
 		}
 		if (obj == gButtons.get(4)) 
 		{

@@ -46,6 +46,11 @@
 			<location>C:/Users/Owner/Desktop/Images/menu1.png</location>
 		</link>
 		<link>
+			<name>media/settings.png</name>
+			<type>1</type>
+			<location>C:/Users/Owner/Desktop/Images/settings.png</location>
+		</link>
+		<link>
 			<name>media/store.png</name>
 			<type>1</type>
 			<location>C:/Users/Owner/Desktop/Images/Store.png</location>
