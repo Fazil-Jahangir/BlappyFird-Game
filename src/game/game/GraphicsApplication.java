@@ -23,13 +23,13 @@ public abstract class GraphicsApplication extends GraphicsProgram
 	
 	protected void switchToScreen(GraphicsPane newScreen) 
 	{
-		if(curScreen != null) {
+		if(curScreen != null) 
+		{
 			curScreen.hideContents();
 		}
 		newScreen.showContents();
 		curScreen = newScreen;
-	}
-	
+	}	
 	
 	@Override
 	public void mousePressed(MouseEvent e) 
@@ -50,7 +50,8 @@ public abstract class GraphicsApplication extends GraphicsProgram
 	@Override
 	public void mouseClicked(MouseEvent e) 
 	{
-		if(curScreen != null) {
+		if(curScreen != null) 
+		{
 			curScreen.mouseClicked(e);
 		}
 	}
@@ -58,7 +59,8 @@ public abstract class GraphicsApplication extends GraphicsProgram
 	@Override
 	public void mouseDragged(MouseEvent e) 
 	{
-		if(curScreen != null) {
+		if(curScreen != null) 
+		{
 			curScreen.mouseDragged(e);
 		}
 	}
@@ -66,7 +68,8 @@ public abstract class GraphicsApplication extends GraphicsProgram
 	@Override
 	public void mouseMoved(MouseEvent e) 
 	{		
-		if(curScreen != null) {
+		if(curScreen != null) 
+		{
 			curScreen.mouseMoved(e);
 		}
 	}
@@ -74,7 +77,8 @@ public abstract class GraphicsApplication extends GraphicsProgram
 	@Override
 	public void keyPressed(KeyEvent e) 
 	{
-		if(curScreen != null) {
+		if(curScreen != null) 
+		{
 			curScreen.keyPressed(e);
 		}
 	}
@@ -82,7 +86,8 @@ public abstract class GraphicsApplication extends GraphicsProgram
 	@Override
 	public void keyReleased(KeyEvent e) 
 	{
-		if(curScreen != null) {
+		if(curScreen != null) 
+		{
 			curScreen.keyReleased(e);
 		}
 	}
@@ -90,7 +95,8 @@ public abstract class GraphicsApplication extends GraphicsProgram
 	@Override
 	public void keyTyped(KeyEvent e) 
 	{
-		if(curScreen != null) {
+		if(curScreen != null) 
+		{
 			curScreen.keyTyped(e);
 		}
 	}

@@ -13,8 +13,9 @@ public class MainApplication extends GraphicsApplication
 	public static final int BUTTON_WIDTH = 50;
 	
 	private MenuPane menuPane;
+	private StorePane storePane;
 	
-	public static GImage background = new GImage("menu3.png", 0, 0);
+	public static GImage background = new GImage("menu.png", 0, 0);
 	
 	public void init() 
 	{
@@ -24,21 +25,17 @@ public class MainApplication extends GraphicsApplication
 	public void run() 
 	{
 		menuPane = new MenuPane(this);
+		storePane = new StorePane(this);
 		switchToScreen(menuPane);
 	}
 	
-	/*
-	public static void highlightsButton(GButton button, GObject obj, int r, int g, int b) 
+	public void switchToMenu() 
 	{
-		Color highlightColor = new Color(r, g, b);
-		if (obj == button)
-		{
-			button.setFillColor(highlightColor);
-		}			
-		else 
-		{
-			button.setFillColor(Color.BLACK);
-		}
+		switchToScreen(menuPane);
 	}
-	*/
+	
+	public void switchToStore() 
+	{
+		switchToScreen(storePane);
+	}
 }

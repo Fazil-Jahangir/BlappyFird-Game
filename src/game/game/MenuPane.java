@@ -12,7 +12,7 @@ public class MenuPane extends GraphicsPane
 	
 	private static GRect menuBox = new GRect(0, 150, 1000, 60);
 	
-	private String[] gbuttonStrings = { "Start Game", "Instructions", "Settings", "High Scores", "Quit" };
+	private String[] gbuttonStrings = { "Start Game", "Instructions", "Store", "Settings", "Quit" };
 	private ArrayList<GButton> gButtons = new ArrayList<GButton>();
 	
 	public MenuPane(MainApplication app) 
@@ -68,7 +68,7 @@ public class MenuPane extends GraphicsPane
 		}
 		if (obj == gButtons.get(2)) 
 		{
-			//program.switchToHighScores();
+			program.switchToStore();
 		}
 		if (obj == gButtons.get(3)) 
 		{

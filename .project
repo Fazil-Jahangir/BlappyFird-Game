@@ -38,7 +38,7 @@
 		<link>
 			<name>media/menu.png</name>
 			<type>1</type>
-			<location>C:/Users/Owner/Desktop/Images/menu.png</location>
+			<location>C:/Users/Owner/Desktop/Images/menu3.png</location>
 		</link>
 		<link>
 			<name>media/menu1.png</name>
@@ -46,9 +46,9 @@
 			<location>C:/Users/Owner/Desktop/Images/menu1.png</location>
 		</link>
 		<link>
-			<name>media/menu3.png</name>
+			<name>media/store.png</name>
 			<type>1</type>
-			<location>C:/Users/Owner/Desktop/Images/menu3.png</location>
+			<location>C:/Users/Owner/Desktop/Images/Store.png</location>
 		</link>
 	</linkedResources>
 </projectDescription>
