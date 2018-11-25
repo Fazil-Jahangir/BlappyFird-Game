@@ -1,49 +1,50 @@
 package game;
 
 /**
- * Physic's class manages the physics of the objects in the game. For now, bird is the only object moving dynamically. If enemies or any objects needed gravity,
- * implement here in this class.
+ * Physic's class manages the physics of the objects in the game. For now, bird
+ * is the only object moving dynamically. If enemies or any objects needed
+ * gravity, implement here in this class.
  *
  */
 
 public class Physics {
-	
+
 	public float x;
 	public float y;
 	public float vx;
 	public float vy;
-	
-	//Constructor for physics. Values also determine the starting position of the bird as well. 
+
+	// Constructor for physics. Values also determine the starting position of the
+	// bird as well.
 	public Physics() {
 		x = 100;
 		y = 100;
 	}
-	
-	//Getters
+
+	// Getters
 	public float getX() {
 		return x;
 	}
-	
+
 	public float getY() {
 		return y;
 	}
-	
-	//Setters
+
+	// Setters
 	public void setX(float x) {
 		this.x = x;
 	}
-	
+
 	public void setY(float y) {
 		this.y = y;
 	}
-	
-	//Controls the jumping/flying action for the bird
-	public void birdJump() 
-	{
+
+	// Controls the jumping/flying action for the bird
+	public void birdJump() {
 		vy = -8;
 	}
-	
-	//Controls the behavior of the bird
+
+	// Controls the behavior of the bird
 	public void birdPhysics() {
 		x += vx;
 		y += vy;

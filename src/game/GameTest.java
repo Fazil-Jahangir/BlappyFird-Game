@@ -1,3 +1,8 @@
+
+/*
+ * GameTest.java is the running Java Applet program
+ */
+
 package game;
 
 //import java.awt.Color;
@@ -11,12 +16,7 @@ import acm.graphics.GLabel;
 //import acm.graphics.GOval;
 import acm.program.GraphicsProgram;
 
-/*
- * RUN THIS PROGRAM
- */
-
-public class GameTest extends GraphicsProgram implements ActionListener 
-{
+public class GameTest extends GraphicsProgram implements ActionListener {
 
 	// WINDOW PANEL SIZE
 	private static final int WINDOW_HEIGHT = 535;
@@ -32,7 +32,6 @@ public class GameTest extends GraphicsProgram implements ActionListener
 	private int NUMTIME = 0;
 	private int backgroundSpeed = 2;
 	private boolean gameEnded = false;
-	
 
 	private Graphics background1 = new Graphics("background1.png", 0, 0, WINDOW_HEIGHT, WINDOW_WIDTH);
 	private Graphics background2 = new Graphics("background2.png", 1280, 0, WINDOW_HEIGHT, WINDOW_WIDTH);
@@ -40,13 +39,11 @@ public class GameTest extends GraphicsProgram implements ActionListener
 	private PipeGeneration pipes;
 
 	// Window initialization. It will create the window dimensions for the game.
-	public void init() 
-	{
+	public void init() {
 		setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 	}
 
-	public void run() 
-	{
+	public void run() {
 		drawBackground();
 		bird = new Bird(this);
 		pipes = new PipeGeneration(this);
@@ -56,26 +53,22 @@ public class GameTest extends GraphicsProgram implements ActionListener
 		addKeyListeners();
 	}
 
-	public void actionPerformed(ActionEvent e) 
-	{		
+	public void actionPerformed(ActionEvent e) {
 		scrollingBackground();
-		//Checks if the bird hits the ground
-		if (bird.birdGetY() >= WINDOW_HEIGHT) 
-		{
+		// Checks if the bird hits the ground
+		if (bird.birdGetY() >= WINDOW_HEIGHT) {
 			System.out.println("\nCOLLISION DETECTED! @ Bottom of screen... calling endGame() now");
 			endGame();
 		}
 		NUMTIME++;
-		if (NUMTIME % 50 == 0) 
-		{
+		if (NUMTIME % 50 == 0) {
 			pipes.drawPipes();
 		}
 		pipes.movePipeImages();
-		bird.birdPhysics();		
+		bird.birdPhysics();
 	}
 
-	public void drawBackground() 
-	{
+	public void drawBackground() {
 		background1.draw(this);
 		background2.draw(this);
 	}
@@ -89,66 +82,53 @@ public class GameTest extends GraphicsProgram implements ActionListener
 				bird.birdJump();
 			}
 
-			
-			 //On Escape press, call pauseMenu() 
+			// On Escape press, call pauseMenu()
 			if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
 				System.out.println("\nESC pressed - calling pauseMenu()");
 				pauseMenu();
 			}
-			 
+
 		}
 	}
-	
-	//Method when the the game is ended
+
+	// Method when the the game is ended
 	/*
-	 * TODO
-	 * MENU PANE
+	 * TODO MENU PANE
 	 */
-	public void endGame() 
-	{
+	public void endGame() {
 		System.out.println("	endGame() called\n");
 		gameEnded = true;
 		GLabel endGameLabel = new GLabel("Game Ended!", WINDOW_WIDTH / 2 - 50, WINDOW_HEIGHT / 2);
-        add(endGameLabel);
-        timer.stop();
+		add(endGameLabel);
+		timer.stop();
 	}
-	//Method to pause the game
+	// Method to pause the game
 	/*
-	 * TODO
-	 * MENU PANE
+	 * TODO MENU PANE
 	 */
-	
-	public void pauseMenu() 
-	{
+
+	public void pauseMenu() {
 		System.out.println("	pauseGame() called\n");
 		timer.stop();
 	}
-	
-	public void getScore() 
-	{
-		
+
+	public void getScore() {
+
 	}
-	
-	//scrolling 2D background:
-	public void scrollingBackground()
-	{ 
-		//Moves background image:
-		if(background1.getX() > -1260)
-		{
+
+	// scrolling 2D background:
+	public void scrollingBackground() {
+		// Moves background image:
+		if (background1.getX() > -1260) {
 			background1.changeLocation(background1.getX() - backgroundSpeed, background1.getY());
 			System.out.println("BACKGROUND1x: " + background1.getX());
-		}
-		else
-		{
+		} else {
 			background1.changeLocation(1260, background1.getY());
 		}
-		if(background2.getX() > -1260)
-		{
+		if (background2.getX() > -1260) {
 			background2.changeLocation(background2.getX() - backgroundSpeed, background2.getY());
 			System.out.println("BACKGROUND2x: " + background2.getX());
-		}
-		else
-		{
+		} else {
 			background2.changeLocation(1260, background2.getY());
 		}
 	}
