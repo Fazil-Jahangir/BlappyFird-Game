@@ -9,7 +9,7 @@ public class Graphics {
 	private int width;
 	private int height;
 	private GImage img;
-	private ConsoleGame program;
+	private MainApplication program;
 	private GameTest game;
 
 	public Graphics(String fileLocation, int x, int y, int height, int width) {
@@ -24,7 +24,7 @@ public class Graphics {
 	 * TODO: Add the bird to 0,0 location, we may need to think about using an
 	 * instance variable here
 	 */
-	public void draw(ConsoleGame app) {
+	public void draw(MainApplication app) {
 		this.program = app;
 		img = new GImage(fileLocation, x, y);
 		showContents();
@@ -34,7 +34,7 @@ public class Graphics {
 	public void draw(GameTest g) {
 		this.game = g;
 		img = new GImage(fileLocation, x, y);
-		showContentsGame();
+		//showContentsGame();
 	}
 
 	// Setters:
@@ -85,9 +85,9 @@ public class Graphics {
 	}
 
 	// TEST
-	public void showContentsGame() {
+	/*public void showContentsGame() {
 		game.add(img);
-	}
+	}*/
 
 	public void hideContents() {
 		program.remove(img);

@@ -25,12 +25,15 @@ public class PipeGeneration extends GraphicsProgram {
 	private int pipeSpeed = 2;
 	private Graphics g;
 	private int x = 0;
-	private GameTest program;
+	private MainApplication program;
+	
 	private RandomGenerator rgen;
 	private GRect rect;
+	private Bird bird;
+	
 
 	// Constructor
-	public PipeGeneration(GameTest app) {
+	public PipeGeneration(MainApplication app) {
 		program = app;
 		rgen = RandomGenerator.getInstance();
 		pipes = new ArrayList<Graphics>();
@@ -84,6 +87,17 @@ public class PipeGeneration extends GraphicsProgram {
 			p.changeFloatLocation((float) p.getX() - pipeSpeed, (float) p.getY());
 		}
 		System.out.println("TEST MOVEMENT");
+	}
+	
+	
+	//TEST COLLISION: DOES NOT WORK
+	public boolean checkCollision() {
+		for (Graphics p : pipes) {
+			if (bird.getY() == p.getY()) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

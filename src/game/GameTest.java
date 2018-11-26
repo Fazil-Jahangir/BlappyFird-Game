@@ -9,14 +9,17 @@ package game;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+
 import javax.swing.Timer;
 //import acm.util.RandomGenerator;
 
+import acm.graphics.GImage;
 import acm.graphics.GLabel;
 //import acm.graphics.GOval;
 import acm.program.GraphicsProgram;
 
-public class GameTest extends GraphicsProgram implements ActionListener {
+public class GameTest extends GraphicsPane implements ActionListener {
 
 	// WINDOW PANEL SIZE
 	private static final int WINDOW_HEIGHT = 535;
@@ -28,18 +31,23 @@ public class GameTest extends GraphicsProgram implements ActionListener {
 	 */
 
 	private Timer timer;
+	
+	
 
 	private int NUMTIME = 0;
 	private int backgroundSpeed = 2;
 	private boolean gameEnded = false;
+	
 
 	private Graphics background1 = new Graphics("background1.png", 0, 0, WINDOW_HEIGHT, WINDOW_WIDTH);
 	private Graphics background2 = new Graphics("background2.png", 1280, 0, WINDOW_HEIGHT, WINDOW_WIDTH);
+	
+	private MainApplication program;
 	private Bird bird;
 	private PipeGeneration pipes;
 
 	// Window initialization. It will create the window dimensions for the game.
-	public void init() {
+	/*public void init() {
 		setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 	}
 
@@ -51,45 +59,81 @@ public class GameTest extends GraphicsProgram implements ActionListener {
 		timer.start();
 		bird.drawBird();
 		addKeyListeners();
+	}*/
+	
+	public GameTest(MainApplication app) {
+		program = app;
+		drawBackground();
+		bird = new Bird(app);
+		pipes = new PipeGeneration(app);
+		timer = new Timer(1000 / 60, this);
+		gameEnded = false;
+		timer.start();
+		bird.drawBird();
+	}
+	@Override
+	public void showContents() {
+		program.add(bird);
+		program.add(pipes);
+	}
+	@Override
+	public void hideContents() {
+		program.remove(bird);
+		program.remove(pipes);
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		scrollingBackground();
-		// Checks if the bird hits the ground
-		if (bird.birdGetY() >= WINDOW_HEIGHT) {
-			System.out.println("\nCOLLISION DETECTED! @ Bottom of screen... calling endGame() now");
-			endGame();
+		if (gameEnded == true) {
+			scrollingBackground();
+			// Checks if the bird hits the ground
+			if (bird.birdGetY() >= WINDOW_HEIGHT) {
+				System.out.println("\nCOLLISION DETECTED! @ Bottom of screen... calling endGame() now");
+				endGame();
+			}
+			
+			NUMTIME++;
+			if (NUMTIME % 50 == 0) {
+				pipes.drawPipes();
+			}
+			pipes.movePipeImages();
+			bird.birdPhysics();
 		}
-		NUMTIME++;
-		if (NUMTIME % 50 == 0) {
-			pipes.drawPipes();
-		}
-		pipes.movePipeImages();
-		bird.birdPhysics();
 	}
 
 	public void drawBackground() {
-		background1.draw(this);
-		background2.draw(this);
+		background1.draw(program);
+		background2.draw(program);
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		if (gameEnded == false) {
-			// On Spacebar press, call birdJump() to make bird jump
-			if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-				System.out.println("\nSPACEBAR pressed - calling jump()");
-				bird.birdJump();
-			}
-
-			// On Escape press, call pauseMenu()
-			if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-				System.out.println("\nESC pressed - calling pauseMenu()");
-				pauseMenu();
-			}
-
+		//if (gameEnded) {
+		// On Spacebar press, call birdJump() to make bird jump
+		// Spacebar when the game starts will allow the game to start
+		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+			System.out.println("\nSPACEBAR pressed - calling jump()");
+			gameEnded = true;
+			bird.birdJump();
 		}
+
+		// On Escape press, call pauseMenu()
+		if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+			System.out.println("\nESC pressed - calling pauseMenu()");
+			pauseMenu();
+		}
+
+		//}
 	}
+	//MOUSE PRESS FUNCTIONS
+	/*public void mousePressed(MouseEvent e) {
+		if (program.getElementAt(e.getX(), e.getY()) == returnLabel) {
+			gameEnded = false;
+			program.switchToMenu();
+		} else {
+			gameEnded = true;
+			showContents();
+		}
+	}*/
 
 	// Method when the the game is ended
 	/*
@@ -99,7 +143,7 @@ public class GameTest extends GraphicsProgram implements ActionListener {
 		System.out.println("	endGame() called\n");
 		gameEnded = true;
 		GLabel endGameLabel = new GLabel("Game Ended!", WINDOW_WIDTH / 2 - 50, WINDOW_HEIGHT / 2);
-		add(endGameLabel);
+		program.add(endGameLabel);
 		timer.stop();
 	}
 	// Method to pause the game
@@ -132,5 +176,22 @@ public class GameTest extends GraphicsProgram implements ActionListener {
 			background2.changeLocation(1260, background2.getY());
 		}
 	}
+	
+	
+	
+	/*public boolean itemsCollisionTest(GImage image) {
+		return (monkey.getY() - image.getY() <= Y_MONKEY_COLLISION
+				&& monkey.getY() - image.getY() >= -Y_MONKEY_COLLISION
+				&& monkey.getX() - image.getX() <= X_MONKEY_COLLISION
+				&& monkey.getX() - image.getX() >= -X_MONKEY_COLLISION);
+	}
+	
+	public void checkForCollision() {
+		for (Items item : listOfItems)
+			if (item.getGImage().isVisible() && itemsCollisionTest(item.getGImage())) {
+				checkForTypeScore(item);
+				item.getGImage().setVisible(false);
+			}
+	}*/
 
 }

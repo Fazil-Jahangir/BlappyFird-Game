@@ -14,14 +14,14 @@ public class Bird extends GraphicsProgram {
 	//public float x, y;
 	//public float xspeed, yspeed;
 	private Physics p = new Physics();
-	private GameTest program;
+	private MainApplication program;
 	private Graphics g;
 
 	//Screen Dimensions for Bird scaling
 	private static final int WINDOW_HEIGHT = 576;
 	private static final int WINDOW_WIDTH = 1024;
 
-	public Bird(GameTest app) {
+	public Bird(MainApplication app) {
 		program = app;
 	}
 	
