@@ -1,4 +1,3 @@
-
 /*
  * GameTest.java is the running Java Applet program
  */
@@ -23,7 +22,6 @@ import acm.program.GraphicsProgram;
 
 public class GameTest extends GraphicsPane implements ActionListener {
 
-	// WINDOW PANEL SIZE
 	private static final int WINDOW_HEIGHT = 535;
 	private static final int WINDOW_WIDTH = 1000;
 
@@ -32,20 +30,22 @@ public class GameTest extends GraphicsPane implements ActionListener {
 	 * 210; private static int BIRD_POSITION_Y = 300;
 	 */
 
-	private Timer timer;
-
 	private int NUMTIME = 0;
 	private int backgroundSpeed = 2;
+	private int score;
 	private boolean gameEnded = false;
-	private boolean removeStartLabel = false;
+	private boolean paused = false;
 
 	private Graphics background1 = new Graphics("background1.png", 0, 0, WINDOW_HEIGHT, WINDOW_WIDTH);
 	private Graphics background2 = new Graphics("background2.png", 1280, 0, WINDOW_HEIGHT, WINDOW_WIDTH);
 	
+	private Timer timer;
 	private MainApplication program;
 	private Bird bird;
 	private PipeGeneration pipes;
 	private GLabel beginInstructions;
+	private GLabel pauseMenuLabel;
+	private GLabel scoreDisplay;
 
 	// Window initialization. It will create the window dimensions for the game.
 	/*public void init() {
@@ -69,10 +69,7 @@ public class GameTest extends GraphicsPane implements ActionListener {
 		pipes = new PipeGeneration(app, bird);
 		timer = new Timer(1000 / 60, this);
 		gameEnded = false;
-		
-		// "Press Spacebar to begin"
 		beginGameInstructions();
-		
 		timer.start();
 		bird.drawBird();
 	}
@@ -86,9 +83,9 @@ public class GameTest extends GraphicsPane implements ActionListener {
 		program.remove(bird);
 		program.remove(pipes);
 	}
-
+	
 	public void actionPerformed(ActionEvent e) {
-		if (gameEnded == true) {
+		if (gameEnded != false) {
 			scrollingBackground();
 			
 			// Checks if the bird hits the ground
@@ -104,7 +101,9 @@ public class GameTest extends GraphicsPane implements ActionListener {
 			// TODO: Checks if bird hits a pipe
 			pipes.movePipeImages();
 			bird.birdPhysics();
-			pipes.checkCollision2();
+			//pipes.checkCollision2();
+		
+			//scoreManager();
 		}
 	}
 
@@ -115,9 +114,11 @@ public class GameTest extends GraphicsPane implements ActionListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		//if (gameEnded) {
-		// On Spacebar press, call birdJump() to make bird jump
-		// Spacebar when the game starts will allow the game to start
+		/* if (gameEnded) {
+		 * On Spacebar press, call birdJump() to make bird jump
+		 * Spacebar when the game starts will allow the game to start
+		 */
+		
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 			program.remove(beginInstructions);
 			
@@ -126,16 +127,27 @@ public class GameTest extends GraphicsPane implements ActionListener {
 			bird.birdJump();
 		}
 
-		// On Escape press, call pauseMenu()
-		if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-			System.out.println("\nESC pressed - calling pauseMenu()");
-			pauseMenu();
+		// Exit Pause menu
+		if (paused == true) {
+			if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+				System.out.println("\nCalling exitPauseMenu()");
+				exitPauseMenu();
+			}
 		}
-
-		//}
+		
+		// Enter Pause menu
+		else if (paused == false) {
+			if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+				System.out.println("\nESC pressed - calling pauseMenu()");
+				pauseMenu();
+			}
+		}
+		
+		
 	}
 	//MOUSE PRESS FUNCTIONS
-	/*public void mousePressed(MouseEvent e) {
+	/*
+	public void mousePressed(MouseEvent e) {
 		if (program.getElementAt(e.getX(), e.getY()) == returnLabel) {
 			gameEnded = false;
 			program.switchToMenu();
@@ -143,27 +155,16 @@ public class GameTest extends GraphicsPane implements ActionListener {
 			gameEnded = true;
 			showContents();
 		}
-	}*/
-
-	// Method when the the game is ended
-	/*
-	 * TODO MENU PANE
-	 */
-	public void endGame() {
-		System.out.println("	endGame() called\n");
-		gameEnded = true;
-		GLabel endGameLabel = new GLabel("Game Ended!", WINDOW_WIDTH / 2 - 50, WINDOW_HEIGHT / 2);
-		program.add(endGameLabel);
-		timer.stop();
 	}
-	// Method to pause the game
-	/*
-	 * TODO MENU PANE
-	 */
-
-	public void pauseMenu() {
-		System.out.println("	pauseGame() called\n");
-		timer.stop();
+	*/
+	
+	public void scoreManager() {
+		score++;
+		
+		scoreDisplay = new GLabel(Integer.toString(score), WINDOW_WIDTH / 2 - 200, WINDOW_HEIGHT / 2 - 80);
+		scoreDisplay.setFont(new Font("Algerian", Font.BOLD, 30));
+		scoreDisplay.setColor(Color.WHITE);
+		program.add(scoreDisplay);
 	}
 	
 	/*
@@ -171,15 +172,45 @@ public class GameTest extends GraphicsPane implements ActionListener {
 	 * at beginning of the game
 	 */
 	public void beginGameInstructions() {
-		// "Press Spacebar to begin"
 		beginInstructions = new GLabel("PRESS SPACEBAR TO BEGIN", WINDOW_WIDTH / 2 - 200, WINDOW_HEIGHT / 2);
 		beginInstructions.setFont(new Font("Algerian", Font.BOLD, 26));
 		beginInstructions.setColor(Color.WHITE);
 		program.add(beginInstructions);
 	}
+	
+	public void pauseMenu() {
+		System.out.println("	pauseMenu() called\n");
+		
+		// Add pause menu title
+		pauseMenuLabel = new GLabel("PAUSED", WINDOW_WIDTH / 2 - 70, WINDOW_HEIGHT / 2 - 50);
+		pauseMenuLabel.setFont(new Font("Algerian", Font.BOLD, 44));
+		pauseMenuLabel.setColor(Color.WHITE);
+		program.add(pauseMenuLabel);
+	
+		paused = true;
+		timer.stop();
+	}
+	
+	public void exitPauseMenu() {		
+		program.remove(pauseMenuLabel);
+		paused = false;
+		timer.start();
+	}
+	
+	public void endGame() {
+		System.out.println("	endGame() called\n");
+		gameEnded = true;
+		
+		// Add end game label
+		GLabel endGameLabel = new GLabel("GAME ENDED!", WINDOW_WIDTH / 2 - 100, WINDOW_HEIGHT / 2 - 50);
+		endGameLabel.setFont(new Font("Algerian", Font.BOLD, 26));
+		endGameLabel.setColor(Color.WHITE);
+		program.add(endGameLabel);
+		
+		timer.stop();
+	}
 
-
-	// scrolling 2D background:
+	// Scrolling 2D background:
 	public void scrollingBackground() {
 		// Moves background image:
 		if (background1.getX() > -1260) {
@@ -197,8 +228,8 @@ public class GameTest extends GraphicsPane implements ActionListener {
 	}
 	
 	
-	
-	/*public boolean itemsCollisionTest(GImage image) {
+	/*
+	public boolean itemsCollisionTest(GImage image) {
 		return (monkey.getY() - image.getY() <= Y_MONKEY_COLLISION
 				&& monkey.getY() - image.getY() >= -Y_MONKEY_COLLISION
 				&& monkey.getX() - image.getX() <= X_MONKEY_COLLISION
@@ -211,6 +242,7 @@ public class GameTest extends GraphicsPane implements ActionListener {
 				checkForTypeScore(item);
 				item.getGImage().setVisible(false);
 			}
-	}*/
+	}
+	*/
 
 }
