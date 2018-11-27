@@ -4,24 +4,21 @@
 
 package game;
 
+import java.awt.Button;
 import java.awt.Color;
 import java.awt.Font;
 //import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 
 import javax.swing.Timer;
 //import acm.util.RandomGenerator;
 
-import acm.graphics.GImage;
-import acm.graphics.GLabel;
+import acm.graphics.*;
 //import acm.graphics.GOval;
-import acm.program.GraphicsProgram;
+import acm.program.*;
 
 public class GameTest extends GraphicsPane implements ActionListener {
-
+	
 	private static final int WINDOW_HEIGHT = 535;
 	private static final int WINDOW_WIDTH = 1000;
 
@@ -44,8 +41,12 @@ public class GameTest extends GraphicsPane implements ActionListener {
 	private Bird bird;
 	private PipeGeneration pipes;
 	private GLabel beginInstructions;
+	private GLabel endGameLabel;
 	private GLabel pauseMenuLabel;
 	private GLabel scoreDisplay;
+	private GLabel scoreLabel;
+	
+	private GButton restartGameButton;
 
 	// Window initialization. It will create the window dimensions for the game.
 	/*public void init() {
@@ -64,6 +65,7 @@ public class GameTest extends GraphicsPane implements ActionListener {
 	
 	public GameTest(MainApplication app) {
 		program = app;
+		
 		drawBackground();
 		bird = new Bird(app);	
 		pipes = new PipeGeneration(app, bird);
@@ -72,6 +74,7 @@ public class GameTest extends GraphicsPane implements ActionListener {
 		beginGameInstructions();
 		timer.start();
 		bird.drawBird();
+
 	}
 	@Override
 	public void showContents() {
@@ -146,8 +149,15 @@ public class GameTest extends GraphicsPane implements ActionListener {
 		
 	}
 	//MOUSE PRESS FUNCTIONS
-	/*
+
 	public void mousePressed(MouseEvent e) {
+		GObject obj = program.getElementAt(e.getX(), e.getY());
+		
+		if (obj == restartGameButton) {
+			System.out.println("Restart Game button clicked");
+			restartGame();	
+		}
+	/*
 		if (program.getElementAt(e.getX(), e.getY()) == returnLabel) {
 			gameEnded = false;
 			program.switchToMenu();
@@ -155,8 +165,25 @@ public class GameTest extends GraphicsPane implements ActionListener {
 			gameEnded = true;
 			showContents();
 		}
+		*/
 	}
-	*/
+	
+	public void mouseReleased() {
+		
+	}
+	
+	public void mouseClicked() {
+		
+	}
+	
+	public void mouseEntered() {
+		
+	}
+	
+	public void mouseExited() {
+		
+	}
+	
 	
 	public void scoreManager() {
 		score++;
@@ -197,19 +224,45 @@ public class GameTest extends GraphicsPane implements ActionListener {
 		timer.start();
 	}
 	
+	public void restartGame() {
+		System.out.println("\nrestartGame() called");
+
+		program.remove(endGameLabel);
+		//program.remove(pauseMenuLabel);
+		//program.remove(scoreDisplay);
+		program.remove(scoreLabel);
+		program.remove(restartGameButton);
+		
+		//drawBackground()
+		gameEnded = false;
+		beginGameInstructions();
+		timer.restart();
+		bird.drawBird();
+	}
+	
 	public void endGame() {
 		System.out.println("	endGame() called\n");
 		gameEnded = true;
 		
 		// Add end game label
-		GLabel endGameLabel = new GLabel("GAME ENDED!", WINDOW_WIDTH / 2 - 100, WINDOW_HEIGHT / 2 - 50);
+		endGameLabel = new GLabel("GAME ENDED!", WINDOW_WIDTH / 2 - 100, WINDOW_HEIGHT / 2 - 50);
 		endGameLabel.setFont(new Font("Algerian", Font.BOLD, 26));
 		endGameLabel.setColor(Color.WHITE);
 		program.add(endGameLabel);
 		
 		timer.stop();
+		
+		// Add score label
+		scoreLabel = new GLabel("Score: " + score, WINDOW_WIDTH / 2 - 50, WINDOW_HEIGHT / 2 - 10);
+		scoreLabel.setFont(new Font("Algerian", Font.ITALIC, 18));
+		scoreLabel.setColor(Color.WHITE);
+		program.add(scoreLabel);
+		
+		// Add restart game button 
+		restartGameButton = new GButton("Restart", WINDOW_WIDTH / 2 - 20, WINDOW_HEIGHT / 2 - 10, 100, 50);		
+		program.add(restartGameButton);
 	}
-
+	
 	// Scrolling 2D background:
 	public void scrollingBackground() {
 		// Moves background image:
