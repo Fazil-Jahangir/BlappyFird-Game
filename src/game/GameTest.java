@@ -5,6 +5,8 @@
 
 package game;
 
+import java.awt.Color;
+import java.awt.Font;
 //import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,13 +33,11 @@ public class GameTest extends GraphicsPane implements ActionListener {
 	 */
 
 	private Timer timer;
-	
-	
 
 	private int NUMTIME = 0;
 	private int backgroundSpeed = 2;
 	private boolean gameEnded = false;
-	
+	private boolean removeStartLabel = false;
 
 	private Graphics background1 = new Graphics("background1.png", 0, 0, WINDOW_HEIGHT, WINDOW_WIDTH);
 	private Graphics background2 = new Graphics("background2.png", 1280, 0, WINDOW_HEIGHT, WINDOW_WIDTH);
@@ -45,6 +45,7 @@ public class GameTest extends GraphicsPane implements ActionListener {
 	private MainApplication program;
 	private Bird bird;
 	private PipeGeneration pipes;
+	private GLabel beginInstructions;
 
 	// Window initialization. It will create the window dimensions for the game.
 	/*public void init() {
@@ -64,10 +65,14 @@ public class GameTest extends GraphicsPane implements ActionListener {
 	public GameTest(MainApplication app) {
 		program = app;
 		drawBackground();
-		bird = new Bird(app);
-		pipes = new PipeGeneration(app);
+		bird = new Bird(app);	
+		pipes = new PipeGeneration(app, bird);
 		timer = new Timer(1000 / 60, this);
 		gameEnded = false;
+		
+		// "Press Spacebar to begin"
+		beginGameInstructions();
+		
 		timer.start();
 		bird.drawBird();
 	}
@@ -85,6 +90,7 @@ public class GameTest extends GraphicsPane implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (gameEnded == true) {
 			scrollingBackground();
+			
 			// Checks if the bird hits the ground
 			if (bird.birdGetY() >= WINDOW_HEIGHT) {
 				System.out.println("\nCOLLISION DETECTED! @ Bottom of screen... calling endGame() now");
@@ -95,8 +101,10 @@ public class GameTest extends GraphicsPane implements ActionListener {
 			if (NUMTIME % 50 == 0) {
 				pipes.drawPipes();
 			}
+			// TODO: Checks if bird hits a pipe
 			pipes.movePipeImages();
 			bird.birdPhysics();
+			pipes.checkCollision2();
 		}
 	}
 
@@ -111,6 +119,8 @@ public class GameTest extends GraphicsPane implements ActionListener {
 		// On Spacebar press, call birdJump() to make bird jump
 		// Spacebar when the game starts will allow the game to start
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+			program.remove(beginInstructions);
+			
 			System.out.println("\nSPACEBAR pressed - calling jump()");
 			gameEnded = true;
 			bird.birdJump();
@@ -155,10 +165,19 @@ public class GameTest extends GraphicsPane implements ActionListener {
 		System.out.println("	pauseGame() called\n");
 		timer.stop();
 	}
-
-	public void getScore() {
-
+	
+	/*
+	 * Helper method which displays "Press spacebar to begin"
+	 * at beginning of the game
+	 */
+	public void beginGameInstructions() {
+		// "Press Spacebar to begin"
+		beginInstructions = new GLabel("PRESS SPACEBAR TO BEGIN", WINDOW_WIDTH / 2 - 200, WINDOW_HEIGHT / 2);
+		beginInstructions.setFont(new Font("Algerian", Font.BOLD, 26));
+		beginInstructions.setColor(Color.WHITE);
+		program.add(beginInstructions);
 	}
+
 
 	// scrolling 2D background:
 	public void scrollingBackground() {
