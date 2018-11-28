@@ -25,6 +25,7 @@ public class GameTest extends GraphicsPane implements ActionListener {
 	private int NUMTIME = 0;
 	private int backgroundSpeed = 2;
 	private int score;
+	private boolean endGameChecker = false;
 	private boolean gameEnded = false;
 	private boolean paused = false;
 
@@ -102,9 +103,11 @@ public class GameTest extends GraphicsPane implements ActionListener {
 		
 		// Enter Pause menu
 		else if (paused == false) {
-			if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-				System.out.println("\nESC pressed - calling pauseMenu()");
-				pauseMenu();
+			if (endGameChecker == false) {
+				if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+					System.out.println("\nESC pressed - calling pauseMenu()");
+					pauseMenu();
+				}
 			}
 		}
 		
@@ -242,6 +245,7 @@ public class GameTest extends GraphicsPane implements ActionListener {
 	public void endGame() {
 		System.out.println("	endGame() called\n");
 		gameEnded = true;
+		endGameChecker = true;
 		
 		// Add end game label
 		endGameLabel = new GLabel("GAME ENDED!", WINDOW_WIDTH / 2 - 100, WINDOW_HEIGHT / 2 - 50);
@@ -289,6 +293,7 @@ public class GameTest extends GraphicsPane implements ActionListener {
 		//drawBackground()
 		paused = false;
 		gameEnded = false;
+		endGameChecker = false;
 		score = 0;
 		beginGameInstructions();
 		timer.restart();
