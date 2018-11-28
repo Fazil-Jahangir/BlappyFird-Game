@@ -28,11 +28,13 @@ public class GameTest extends GraphicsPane implements ActionListener {
 	private boolean endGameChecker = false;
 	private boolean gameEnded = false;
 	private boolean paused = false;
+	private boolean scoreDisplayed = false;
 
 	private Graphics background1 = new Graphics("background1.png", 0, 0, WINDOW_HEIGHT, WINDOW_WIDTH);
 	private Graphics background2 = new Graphics("background2.png", 1280, 0, WINDOW_HEIGHT, WINDOW_WIDTH);
 	
 	private Timer timer;
+	private Timer scoreTimer;
 	private MainApplication program;
 	private Bird bird;
 	private PipeGeneration pipes;
@@ -52,32 +54,49 @@ public class GameTest extends GraphicsPane implements ActionListener {
 		bird = new Bird(app);	
 		pipes = new PipeGeneration(app);
 		timer = new Timer(1000 / 60, this);
+		scoreTimer = new Timer(1000/60 * 40, this); // 5 Seconds
 		gameEnded = false;
 		
 		beginGameInstructions();
-		timer.start();
+		timer.start();	
+		
+		// Delay timer while bird flies through empty space
+		scoreTimer.setInitialDelay(1000/60 * 320);
+		scoreTimer.start();
+		
 		bird.drawBird();
-
 	}
+	
 	public void actionPerformed(ActionEvent e) {
-		if (gameEnded != false) {
-			scrollingBackground();
-			
-			// Checks if the bird hits the ground
-			if (bird.birdGetY() >= WINDOW_HEIGHT) {
-				System.out.println("\nCOLLISION DETECTED! @ Bottom of screen... calling endGame() now");
-				endGame();
+		if (e.getSource() == timer) {
+			if (gameEnded != false) {
+				scrollingBackground();
+				
+				// Checks if the bird hits the ground
+				if (bird.birdGetY() >= WINDOW_HEIGHT) {
+					System.out.println("\nCOLLISION DETECTED! @ Bottom of screen... calling endGame() now");
+					endGame();
+				}
+				
+				// Manages the pipe spacing on x-axis
+				NUMTIME++;
+				if (NUMTIME % 35 == 0) {
+					pipes.drawPipes();
+				}
+				// TODO: Checks if bird hits a pipe
+				pipes.movePipeImages();
+				bird.birdPhysics();
+				//pipes.checkCollision2();
 			}
+		}
 			
-			NUMTIME++;
-			if (NUMTIME % 50 == 0) {
-				pipes.drawPipes();
+		if (e.getSource() == scoreTimer) {
+			if (gameEnded != false) {
+				if (scoreDisplayed == true) {
+					removeScoreDisplay();
+				}
+				scoreManager();
 			}
-			// TODO: Checks if bird hits a pipe
-			pipes.movePipeImages();
-			bird.birdPhysics();
-			//pipes.checkCollision2();
-			//scoreManager();
 		}
 	}
 
@@ -113,8 +132,7 @@ public class GameTest extends GraphicsPane implements ActionListener {
 		
 		
 	}
-	//MOUSE PRESS FUNCTIONS
-
+	
 	public void mousePressed(MouseEvent e) {
 		GObject obj = program.getElementAt(e.getX(), e.getY());
 		
@@ -130,15 +148,7 @@ public class GameTest extends GraphicsPane implements ActionListener {
 			restartGame();
 			program.switchToMenu();
 		}
-	/*
-		if (program.getElementAt(e.getX(), e.getY()) == returnLabel) {
-			gameEnded = false;
-			program.switchToMenu();
-		} else {
-			gameEnded = true;
-			showContents();
-		}
-		*/
+
 	}
 	
 	public void mouseReleased() {
@@ -191,12 +201,20 @@ public class GameTest extends GraphicsPane implements ActionListener {
 	}
 	
 	public void scoreManager() {
-		score++;
+		if (paused == false) 
+			score++;
 		
 		scoreDisplay = new GLabel(Integer.toString(score), WINDOW_WIDTH / 2 - 200, WINDOW_HEIGHT / 2 - 80);
 		scoreDisplay.setFont(new Font("Algerian", Font.BOLD, 30));
 		scoreDisplay.setColor(Color.WHITE);
 		program.add(scoreDisplay);
+		
+		scoreDisplayed = true;
+	}
+	
+	public void removeScoreDisplay() {
+		program.remove(scoreDisplay);
+		scoreDisplayed = false;
 	}
 	
 	/*
@@ -231,6 +249,7 @@ public class GameTest extends GraphicsPane implements ActionListener {
 	
 		paused = true;
 		timer.stop();
+		scoreTimer.stop();
 	}
 	
 	public void exitPauseMenu() {		
@@ -238,7 +257,9 @@ public class GameTest extends GraphicsPane implements ActionListener {
 		program.remove(restartGameButton);
 		program.remove(exitToMainMenuButton);
 		paused = false;
+		
 		timer.start();
+		scoreTimer.start();
 	}
 	
 	public void endGame() {
@@ -253,6 +274,7 @@ public class GameTest extends GraphicsPane implements ActionListener {
 		program.add(endGameLabel);
 		
 		timer.stop();
+		scoreTimer.stop();
 		
 		// Add score label
 		scoreLabel = new GLabel("Score: " + score, WINDOW_WIDTH / 2 - 50, WINDOW_HEIGHT / 2 - 10);
@@ -296,6 +318,7 @@ public class GameTest extends GraphicsPane implements ActionListener {
 		score = 0;
 		beginGameInstructions();
 		timer.restart();
+		scoreTimer.restart();
 		bird.drawBird();
 	}
 	
