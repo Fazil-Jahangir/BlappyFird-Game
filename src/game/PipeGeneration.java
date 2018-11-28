@@ -119,6 +119,7 @@ public class PipeGeneration extends GraphicsProgram {
 
     }
 
+    /*
     
     //TEST COLLISION: DOES NOT WORK
     public void checkPipeCollision() {   
