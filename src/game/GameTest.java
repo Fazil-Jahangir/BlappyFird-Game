@@ -22,11 +22,6 @@ public class GameTest extends GraphicsPane implements ActionListener {
 	private static final int WINDOW_HEIGHT = 535;
 	private static final int WINDOW_WIDTH = 1000;
 
-	/*
-	 * private static int BIRD_SIZE = 50; private static final int BIRD_POSITION_X =
-	 * 210; private static int BIRD_POSITION_Y = 300;
-	 */
-
 	private int NUMTIME = 0;
 	private int backgroundSpeed = 2;
 	private int score;
@@ -47,22 +42,8 @@ public class GameTest extends GraphicsPane implements ActionListener {
 	private GLabel scoreLabel;
 	
 	private GButton restartGameButton;
+	private GButton exitToMainMenuButton;
 
-	// Window initialization. It will create the window dimensions for the game.
-	/*public void init() {
-		setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-	}
-
-	public void run() {
-		drawBackground();
-		bird = new Bird(this);
-		pipes = new PipeGeneration(this);
-		timer = new Timer(1000 / 60, this);
-		timer.start();
-		bird.drawBird();
-		addKeyListeners();
-	}*/
-	
 	public GameTest(MainApplication app) {
 		program = app;
 		
@@ -76,17 +57,6 @@ public class GameTest extends GraphicsPane implements ActionListener {
 		bird.drawBird();
 
 	}
-	@Override
-	public void showContents() {
-		program.add(bird);
-		program.add(pipes);
-	}
-	@Override
-	public void hideContents() {
-		program.remove(bird);
-		program.remove(pipes);
-	}
-	
 	public void actionPerformed(ActionEvent e) {
 		if (gameEnded != false) {
 			scrollingBackground();
@@ -110,18 +80,10 @@ public class GameTest extends GraphicsPane implements ActionListener {
 		}
 	}
 
-	public void drawBackground() {
-		background1.draw(program);
-		background2.draw(program);
-	}
-
 	@Override
 	public void keyPressed(KeyEvent e) {
-		/* if (gameEnded) {
-		 * On Spacebar press, call birdJump() to make bird jump
-		 * Spacebar when the game starts will allow the game to start
-		 */
 		
+		// Bird Jump on Space bar press
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 			program.remove(beginInstructions);
 			
@@ -158,6 +120,14 @@ public class GameTest extends GraphicsPane implements ActionListener {
 			reset();
 			restartGame();	
 		}
+		
+		if (obj == exitToMainMenuButton) {
+			gameEnded = false;
+			reset();
+			restartGame();
+			exitPauseMenu();
+			program.switchToMenu();
+		}
 	/*
 		if (program.getElementAt(e.getX(), e.getY()) == returnLabel) {
 			gameEnded = false;
@@ -185,6 +155,38 @@ public class GameTest extends GraphicsPane implements ActionListener {
 		
 	}
 	
+	@Override
+	public void showContents() {
+		program.add(bird);
+		program.add(pipes);
+	}
+	@Override
+	public void hideContents() {
+		program.remove(bird);
+		program.remove(pipes);
+	}
+	
+	public void drawBackground() {
+		background1.draw(program);
+		background2.draw(program);
+	}
+	
+	// Scrolling 2D background:
+	public void scrollingBackground() {
+		// Moves background image:
+		if (background1.getX() > -1260) {
+			background1.changeLocation(background1.getX() - backgroundSpeed, background1.getY());
+			System.out.println("BACKGROUND1x: " + background1.getX());
+		} else {
+			background1.changeLocation(1260, background1.getY());
+		}
+		if (background2.getX() > -1260) {
+			background2.changeLocation(background2.getX() - backgroundSpeed, background2.getY());
+			System.out.println("BACKGROUND2x: " + background2.getX());
+		} else {
+			background2.changeLocation(1260, background2.getY());
+		}
+	}
 	
 	public void scoreManager() {
 		score++;
@@ -219,6 +221,11 @@ public class GameTest extends GraphicsPane implements ActionListener {
 		restartGameButton.setFillColor(Color.WHITE);
 		restartGameButton.setFilled(true);
 		program.add(restartGameButton);
+		
+		exitToMainMenuButton = new GButton("Exit Game", WINDOW_WIDTH / 2 - 50, WINDOW_HEIGHT / 2 + 40, 120, 50);		
+		exitToMainMenuButton.setFillColor(Color.WHITE);
+		exitToMainMenuButton.setFilled(true);
+		program.add(exitToMainMenuButton);
 	
 		paused = true;
 		timer.stop();
@@ -227,29 +234,9 @@ public class GameTest extends GraphicsPane implements ActionListener {
 	public void exitPauseMenu() {		
 		program.remove(pauseMenuLabel);
 		program.remove(restartGameButton);
+		program.remove(exitToMainMenuButton);
 		paused = false;
 		timer.start();
-	}
-	
-	public void restartGame() {
-		System.out.println("\nrestartGame() called");
-
-		if (paused == true) {
-			program.remove(pauseMenuLabel);
-			program.remove(restartGameButton);
-		}
-		else {
-			program.remove(scoreLabel);
-			program.remove(endGameLabel);
-			program.remove(restartGameButton);
-		}
-		
-		//drawBackground()
-		paused = true;
-		gameEnded = false;
-		beginGameInstructions();
-		timer.restart();
-		bird.drawBird();
 	}
 	
 	public void endGame() {
@@ -271,31 +258,41 @@ public class GameTest extends GraphicsPane implements ActionListener {
 		program.add(scoreLabel);
 		
 		// Add restart game button 
-		
 		restartGameButton = new GButton("Restart", WINDOW_WIDTH / 2 - 70, WINDOW_HEIGHT / 2 + 10, 120, 50);		
-
 		restartGameButton.setFillColor(Color.WHITE);
 		restartGameButton.setFilled(true);
 		program.add(restartGameButton);
-		//program.remove(bird);
+
+		// Add exit to main menu button
+		exitToMainMenuButton = new GButton("Exit Game", WINDOW_WIDTH / 2 - 70, WINDOW_HEIGHT / 2 + 70, 120, 50);		
+		exitToMainMenuButton.setFillColor(Color.WHITE);
+		exitToMainMenuButton.setFilled(true);
+		program.add(exitToMainMenuButton);
 		
 	}
 	
-	// Scrolling 2D background:
-	public void scrollingBackground() {
-		// Moves background image:
-		if (background1.getX() > -1260) {
-			background1.changeLocation(background1.getX() - backgroundSpeed, background1.getY());
-			System.out.println("BACKGROUND1x: " + background1.getX());
-		} else {
-			background1.changeLocation(1260, background1.getY());
+	public void restartGame() {
+		System.out.println("\nrestartGame() called");
+
+		if (paused == true) {
+			program.remove(pauseMenuLabel);
+			program.remove(restartGameButton);
+			program.remove(exitToMainMenuButton);
 		}
-		if (background2.getX() > -1260) {
-			background2.changeLocation(background2.getX() - backgroundSpeed, background2.getY());
-			System.out.println("BACKGROUND2x: " + background2.getX());
-		} else {
-			background2.changeLocation(1260, background2.getY());
+		else {
+			program.remove(scoreLabel);
+			program.remove(endGameLabel);
+			program.remove(restartGameButton);
+			program.remove(exitToMainMenuButton);
 		}
+		
+		//drawBackground()
+		paused = false;
+		gameEnded = false;
+		score = 0;
+		beginGameInstructions();
+		timer.restart();
+		bird.drawBird();
 	}
 	
 	public void reset()	{
