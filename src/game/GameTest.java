@@ -68,7 +68,7 @@ public class GameTest extends GraphicsPane implements ActionListener {
 		
 		drawBackground();
 		bird = new Bird(app);	
-		pipes = new PipeGeneration(app, bird);
+		pipes = new PipeGeneration(app);
 		timer = new Timer(1000 / 60, this);
 		gameEnded = false;
 		beginGameInstructions();
@@ -261,6 +261,9 @@ public class GameTest extends GraphicsPane implements ActionListener {
 		// Add restart game button 
 		restartGameButton = new GButton("Restart", WINDOW_WIDTH / 2 - 20, WINDOW_HEIGHT / 2 - 10, 100, 50);		
 		program.add(restartGameButton);
+		bird.birdReset();
+		//program.remove(bird);
+		pipes.resetMap();
 	}
 	
 	// Scrolling 2D background:

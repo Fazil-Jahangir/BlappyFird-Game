@@ -67,6 +67,12 @@ public class Bird extends GraphicsProgram {
 		System.out.println("Y VALUE: " + p.y);
 		return p.y;
 	}
+	
+	public void birdReset() {
+		p.setX(100);
+		p.setY(100);
+		g.hideContents();
+	}
 
 	// resetBirdLocation() will reset the bird's location to original
 	/*public void resetBirdLocation() {

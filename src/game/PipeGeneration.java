@@ -89,6 +89,13 @@ public class PipeGeneration extends GraphicsProgram {
 		System.out.println("TEST MOVEMENT");
 	}
 	
+	public void resetMap() {
+		pipes.clear();
+		for(Graphics p : pipes) {
+			p.hideContents();
+		}
+	}
+	
 	
 	//TEST COLLISION: DOES NOT WORK
 	public boolean checkCollision() {
