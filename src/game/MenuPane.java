@@ -1,91 +1,105 @@
 package game;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import acm.graphics.GObject;
 import acm.graphics.GRect;
+import acm.graphics.GLabel;
 
 public class MenuPane extends GraphicsPane {
 	private MainApplication program;
 
-	private static GRect menuBox = new GRect(0, 150, 1000, 60);
+	private static GRect menuBox = new GRect(0, 157, 1000, 60);
 
-	private String[] gbuttonStrings = { "Start Game", "Instructions", "Store", "Settings", "Quit" };
-	private ArrayList<GButton> gButtons = new ArrayList<GButton>();
+	private String[] glabelStrings = { "Start Game", "Instructions", "Store", "Settings", "Quit" };
+	private ArrayList<GLabel> gLabel = new ArrayList<GLabel>();
 
-	public MenuPane(MainApplication app) {
+	public MenuPane(MainApplication app) 
+	{
 		program = app;
-		for (int i = 0; i < 5; i++) {
-			GButton button = new GButton(gbuttonStrings[i], (MainApplication.WINDOW_WIDTH / 2) - 230, 160 + 70 * i,
-					MainApplication.BUTTON_HEIGHT, MainApplication.BUTTON_WIDTH);
-			button.setColor(Color.WHITE);
-			button.setFilled(true);
-			button.setCustomFont();
-			gButtons.add(button);
-		}
-		menuBox.setFillColor(Color.RED);
+		menuBox.setFillColor(Color.WHITE);
 		menuBox.setFilled(true);
-		menuBox.setVisible(false);
+		for (int i = 0; i < 5; i++) 
+		{
+			GLabel label = new GLabel(glabelStrings[i], (MainApplication.WINDOW_WIDTH / 2) - 180, 200 + 70 * i);
+			label.setColor(Color.WHITE);
+			label.setFont(new Font("Showcard Gothic", Font.BOLD, 35));
+			gLabel.add(label);
+			System.out.println("LabelY: " + label.getY());
+			System.out.println("MenuBoxY: " + menuBox.getY());
+		}
 	}
 
 	@Override
-	public void showContents() {
+	public void showContents() 
+	{
 		program.add(MainApplication.background);
 		program.add(menuBox);
-		for (GButton button : gButtons) {
-			program.add(button);
+		for (GLabel label : gLabel) 
+		{
+			program.add(label);
 		}
-
 	}
 
 	@Override
-	public void hideContents() {
+	public void hideContents() 
+	{
 		program.remove(MainApplication.background);
 		program.remove(menuBox);
-		for (GButton button : gButtons) {
-			program.remove(button);
+		for (GLabel label : gLabel) 
+		{
+			program.remove(label);
 		}
 	}
 
 	@Override
-	public void mousePressed(MouseEvent e) {
+	public void mousePressed(MouseEvent e) 
+	{
 		GObject obj = program.getElementAt(e.getX(), e.getY());
-		if (obj == gButtons.get(0)) {
+		if (obj == gLabel.get(0)) {
 			program.switchToGame();
 		}
-		if (obj == gButtons.get(1)) {
+		if (obj == gLabel.get(1)) {
 			// program.switchToSettings();
 		}
-		if (obj == gButtons.get(2)) {
+		if (obj == gLabel.get(2)) {
 			program.switchToStore();
 		}
-		if (obj == gButtons.get(3)) {
+		if (obj == gLabel.get(3)) {
 			program.switchToSettings();
 		}
-		if (obj == gButtons.get(4)) {
+		if (obj == gLabel.get(4)) {
 			System.exit(0);
 		}
 	}
 
 	@Override
-	public void mouseMoved(MouseEvent e) {
+	public void mouseMoved(MouseEvent e) 
+	{
 		GObject obj = program.getElementAt(e.getX(), e.getY());
-		if (obj != null) {
-			for (GButton button : gButtons) {
-				highlightsButton(button, obj, 255, 255, 255);
+		if (obj != null) 
+		{
+			for (GLabel label : gLabel) 
+			{
+				highlightsLabel(label, obj, 0, 0, 0);
 			}
 		}
 	}
 
-	public static void highlightsButton(GButton button, GObject obj, int r, int g, int b) {
+	public static void highlightsLabel(GLabel label, GObject obj, int r, int g, int b) {
 		Color highlightColor = new Color(r, g, b);
-		if (obj == button) {
-			menuBox.setVisible(true);
-			menuBox.setLocation(0, button.getY());
-			button.setFillColor(highlightColor);
-		} else {
-			button.setFillColor(Color.BLACK);
+		if (obj == label || label.getY() == menuBox.getY() + 43) 
+		{
+			System.out.println("LabelY: " + label.getY());
+			System.out.println("MenuBoxY: " + menuBox.getY());
+			menuBox.setLocation(0, label.getY()-43);
+			label.setColor(highlightColor);
+		} 
+		else 
+		{
+			label.setColor(Color.WHITE);
 		}
 	}
 }

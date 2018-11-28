@@ -8,7 +8,7 @@ import acm.graphics.GRect;
 public class MainApplication extends GraphicsApplication {
 	public static final int WINDOW_HEIGHT = 535;
 	public static final int WINDOW_WIDTH = 1000;
-	public static final int BUTTON_HEIGHT = 120;
+	public static final int BUTTON_HEIGHT = 250;
 	public static final int BUTTON_WIDTH = 50;
 
 	private MenuPane menuPane;
