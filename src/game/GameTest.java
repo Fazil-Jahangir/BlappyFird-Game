@@ -214,6 +214,11 @@ public class GameTest extends GraphicsPane implements ActionListener {
 		pauseMenuLabel.setFont(new Font("Algerian", Font.BOLD, 44));
 		pauseMenuLabel.setColor(Color.WHITE);
 		program.add(pauseMenuLabel);
+		
+		restartGameButton = new GButton("Restart", WINDOW_WIDTH / 2 - 50, WINDOW_HEIGHT / 2 - 20, 120, 50);		
+		restartGameButton.setFillColor(Color.WHITE);
+		restartGameButton.setFilled(true);
+		program.add(restartGameButton);
 	
 		paused = true;
 		timer.stop();
@@ -221,6 +226,7 @@ public class GameTest extends GraphicsPane implements ActionListener {
 	
 	public void exitPauseMenu() {		
 		program.remove(pauseMenuLabel);
+		program.remove(restartGameButton);
 		paused = false;
 		timer.start();
 	}
@@ -228,13 +234,18 @@ public class GameTest extends GraphicsPane implements ActionListener {
 	public void restartGame() {
 		System.out.println("\nrestartGame() called");
 
-		program.remove(endGameLabel);
-		//program.remove(pauseMenuLabel);
-		//program.remove(scoreDisplay);
-		program.remove(scoreLabel);
-		program.remove(restartGameButton);
+		if (paused == true) {
+			program.remove(pauseMenuLabel);
+			program.remove(restartGameButton);
+		}
+		else {
+			program.remove(scoreLabel);
+			program.remove(endGameLabel);
+			program.remove(restartGameButton);
+		}
 		
 		//drawBackground()
+		paused = true;
 		gameEnded = false;
 		beginGameInstructions();
 		timer.restart();
@@ -261,9 +272,11 @@ public class GameTest extends GraphicsPane implements ActionListener {
 		
 		// Add restart game button 
 		
-		restartGameButton = new GButton("Restart", WINDOW_WIDTH / 2 - 20, WINDOW_HEIGHT / 2 - 10, 100, 50);		
+		restartGameButton = new GButton("Restart", WINDOW_WIDTH / 2 - 70, WINDOW_HEIGHT / 2 + 10, 120, 50);		
+
+		restartGameButton.setFillColor(Color.WHITE);
+		restartGameButton.setFilled(true);
 		program.add(restartGameButton);
-		
 		//program.remove(bird);
 		
 	}
