@@ -37,7 +37,7 @@ public class Bird extends GraphicsProgram {
 	 */
 	public Graphics createBird() {
 		Graphics temp;
-		temp = new Graphics("flappy-bird.png", 150, 250, WINDOW_HEIGHT, WINDOW_WIDTH);
+		temp = new Graphics("flappy-bird.png", 100, 250, WINDOW_HEIGHT, WINDOW_WIDTH);
 		return temp;
 	}
 

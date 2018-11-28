@@ -253,17 +253,19 @@ public class GameTest extends GraphicsPane implements ActionListener {
 		timer.stop();
 		
 		// Add score label
+		reset();
 		scoreLabel = new GLabel("Score: " + score, WINDOW_WIDTH / 2 - 50, WINDOW_HEIGHT / 2 - 10);
 		scoreLabel.setFont(new Font("Algerian", Font.ITALIC, 18));
 		scoreLabel.setColor(Color.WHITE);
 		program.add(scoreLabel);
 		
 		// Add restart game button 
+		
 		restartGameButton = new GButton("Restart", WINDOW_WIDTH / 2 - 20, WINDOW_HEIGHT / 2 - 10, 100, 50);		
 		program.add(restartGameButton);
-		bird.birdReset();
+		
 		//program.remove(bird);
-		pipes.resetMap();
+		
 	}
 	
 	// Scrolling 2D background:
@@ -281,6 +283,18 @@ public class GameTest extends GraphicsPane implements ActionListener {
 		} else {
 			background2.changeLocation(1260, background2.getY());
 		}
+	}
+	
+	public void reset()	{
+		bird.birdReset();
+		pipes.resetMap();
+		resetBackground();
+		drawBackground();
+	}
+	
+	public void resetBackground() {
+		background1.hideContents();
+		background2.hideContents();
 	}
 	
 	

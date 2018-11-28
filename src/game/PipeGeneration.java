@@ -94,6 +94,7 @@ public class PipeGeneration extends GraphicsProgram {
 		for(Graphics p : pipes) {
 			p.hideContents();
 		}
+		
 	}
 	
 	
@@ -110,18 +111,6 @@ public class PipeGeneration extends GraphicsProgram {
 }
 
 /*
- * ************************************************ IGNORE TEST CODE
- * ********************************************* /*public void run() { rgen =
- * RandomGenerator.getInstance(); pipes = new ArrayList<Graphics>(); movement =
- * new Timer(50, this); movement.start();
- * 
- * }
- * 
- * public void actionPerformed(ActionEvent e) { numTime++; //
- * System.out.println(NUMTIME); if (numTime % 100 == 0) { drawPipes(); }
- * //movePipeImages(); }
- */
-
-/*
- * public void init() { setSize(WINDOW_WIDTH, WINDOW_HEIGHT); }
+ *
+ *
  */
