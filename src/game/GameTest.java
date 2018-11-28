@@ -53,6 +53,7 @@ public class GameTest extends GraphicsPane implements ActionListener {
 		pipes = new PipeGeneration(app);
 		timer = new Timer(1000 / 60, this);
 		gameEnded = false;
+		
 		beginGameInstructions();
 		timer.start();
 		bird.drawBird();
@@ -76,7 +77,6 @@ public class GameTest extends GraphicsPane implements ActionListener {
 			pipes.movePipeImages();
 			bird.birdPhysics();
 			//pipes.checkCollision2();
-		
 			//scoreManager();
 		}
 	}
@@ -128,7 +128,6 @@ public class GameTest extends GraphicsPane implements ActionListener {
 			gameEnded = false;
 			reset();
 			restartGame();
-			exitPauseMenu();
 			program.switchToMenu();
 		}
 	/*
