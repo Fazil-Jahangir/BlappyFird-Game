@@ -155,6 +155,7 @@ public class GameTest extends GraphicsPane implements ActionListener {
 		
 		if (obj == restartGameButton) {
 			System.out.println("Restart Game button clicked");
+			reset();
 			restartGame();	
 		}
 	/*
@@ -253,7 +254,6 @@ public class GameTest extends GraphicsPane implements ActionListener {
 		timer.stop();
 		
 		// Add score label
-		reset();
 		scoreLabel = new GLabel("Score: " + score, WINDOW_WIDTH / 2 - 50, WINDOW_HEIGHT / 2 - 10);
 		scoreLabel.setFont(new Font("Algerian", Font.ITALIC, 18));
 		scoreLabel.setColor(Color.WHITE);
