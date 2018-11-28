@@ -1,7 +1,9 @@
 package game;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import acm.util.RandomGenerator;
+import acm.graphics.GObject;
 import acm.graphics.GRect;
 import acm.program.GraphicsProgram;
 
@@ -20,12 +22,14 @@ public class PipeGeneration extends GraphicsProgram {
 
     // Store pipes in an ArrayList.
     private ArrayList < Graphics > pipes;
+    private ArrayList < GRect > gRectBehindPipe;
 
     // Declarations
     private int pipeSpeed = 2;
     private Graphics g;
     private int x = 0;
     private MainApplication program;
+    private GameTest game;
 
     private RandomGenerator rgen;
     private GRect rect;
@@ -37,6 +41,7 @@ public class PipeGeneration extends GraphicsProgram {
         program = app;
         rgen = RandomGenerator.getInstance();
         pipes = new ArrayList < Graphics > ();
+        gRectBehindPipe = new ArrayList < GRect > ();
     }
 
     /*
@@ -53,12 +58,23 @@ public class PipeGeneration extends GraphicsProgram {
             // Creates pipe images
             imgY = rgen.nextInt(300, 500);
             temp = new Graphics("pipeUp.png", 1024, imgY, WINDOW_HEIGHT, WINDOW_WIDTH);
-
+            rect = new GRect(1024, imgY, 55, imgY + 400);
+            gRectBehindPipe.add(rect);
+            rect.setColor(Color.BLACK);
+            rect.setFilled(true);
+            rect.setVisible(true);
+            program.add(rect);
             pipes.add(temp);
 
         } else {
             imgY = rgen.nextInt(-250, 5);
             temp = new Graphics("pipeDown.png", 1024, imgY, WINDOW_HEIGHT, WINDOW_WIDTH);
+            rect = new GRect(1024, imgY, 55, imgY + 400);
+            gRectBehindPipe.add(rect);
+            rect.setColor(Color.BLACK);
+            rect.setFilled(true);
+            rect.setVisible(true);
+            program.add(rect);
             pipes.add(temp);
         }
         x++;
@@ -70,7 +86,10 @@ public class PipeGeneration extends GraphicsProgram {
     public void drawPipes() {
         g = createPipes();
         g.draw(program);
-        System.out.println("TEST DRAW PIPES");
+        
+        // Add test rectangle
+        program.add(rect);
+        //System.out.println("TEST DRAW PIPES");
     }
 
     /*
@@ -82,11 +101,14 @@ public class PipeGeneration extends GraphicsProgram {
      */
     public void movePipeImages() {
         for (Graphics p: pipes) {
-            System.out.println("x: " + p.getX() + "size: " + pipes.size());
+            //System.out.println("x: " + p.getX() + "size: " + pipes.size());
             p.changeLocation((int) p.getX() - pipeSpeed, (int) p.getY());
             p.changeFloatLocation((float) p.getX() - pipeSpeed, (float) p.getY());
         }
-        System.out.println("TEST MOVEMENT");
+        for (GObject r : gRectBehindPipe) {
+        	r.move(-4.001, 0);
+        }
+        //System.out.println("TEST MOVEMENT");
     }
 
     public void resetMap() {
@@ -97,15 +119,31 @@ public class PipeGeneration extends GraphicsProgram {
 
     }
 
-
+    
     //TEST COLLISION: DOES NOT WORK
-    public boolean checkPipeCollision() {
+    public void checkPipeCollision() {   
+    	for (GObject r : gRectBehindPipe) {
+        	
+        	//System.out.println("Pipe Y: " + p.getElementAt(pipeY));
+    		if (getElementAt(r.getLocation()) == bird.birdGetY()) {
+    			if(rect.contains(bird.birdGetY())) {
+    				
+    			}
+    		}
+    	}
+    	/*
         for (Graphics p: pipes) {
-            if (bird.getY() == p.getY()) {
-                return true;
-            }
+        	for (GObject r: gRectBehindPipe) {
+        		double pipeYDouble = p.getY();
+            	int pipeY = (int)pipeYDouble;
+            	
+            	//System.out.println("Pipe Y: " + p.getElementAt(pipeY));
+            	
+            	if(bird.getY() == r.getElementAt())	
+        	}
+
         }
-        return false;
+        */
     }
 
 }
