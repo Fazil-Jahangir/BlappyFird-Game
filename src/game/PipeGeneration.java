@@ -14,99 +14,99 @@ import acm.program.GraphicsProgram;
  */
 
 public class PipeGeneration extends GraphicsProgram {
-	// Window Dimensions
-	private static final int WINDOW_HEIGHT = 576;
-	private static final int WINDOW_WIDTH = 1024;
+    // Window Dimensions
+    private static final int WINDOW_HEIGHT = 576;
+    private static final int WINDOW_WIDTH = 1024;
 
-	// Store pipes in an ArrayList.
-	private ArrayList<Graphics> pipes;
+    // Store pipes in an ArrayList.
+    private ArrayList < Graphics > pipes;
 
-	// Declarations
-	private int pipeSpeed = 2;
-	private Graphics g;
-	private int x = 0;
-	private MainApplication program;
-	
-	private RandomGenerator rgen;
-	private GRect rect;
-	private Bird bird;
-	
+    // Declarations
+    private int pipeSpeed = 2;
+    private Graphics g;
+    private int x = 0;
+    private MainApplication program;
 
-	// Constructor
-	public PipeGeneration(MainApplication app) {
-		program = app;
-		rgen = RandomGenerator.getInstance();
-		pipes = new ArrayList<Graphics>();
-	}
+    private RandomGenerator rgen;
+    private GRect rect;
+    private Bird bird;
 
-	/*
-	 * Method will generate pipes throughout the map. Spawning is currently set as 1
-	 * UP facing pipe then 1 DOWN facing pipe then repeat. Although it's not
-	 * spawning randomly, it can be changed by updating the "x" value or changing it
-	 * entirely.
-	 */
-	public Graphics createPipes() {
-		// Controls spawn behavior
-		Graphics temp;
-		int imgY;
-		if (x % 2 == 0) {
-			// Creates pipe images
-			imgY = rgen.nextInt(300, 500);
-			temp = new Graphics("pipeUp.png", 1024, imgY, WINDOW_HEIGHT, WINDOW_WIDTH);
 
-			pipes.add(temp);
+    // Constructor
+    public PipeGeneration(MainApplication app) {
+        program = app;
+        rgen = RandomGenerator.getInstance();
+        pipes = new ArrayList < Graphics > ();
+    }
 
-		} else {
-			imgY = rgen.nextInt(-250, 5);
-			temp = new Graphics("pipeDown.png", 1024, imgY, WINDOW_HEIGHT, WINDOW_WIDTH);
-			pipes.add(temp);
-		}
-		x++;
-		System.out.println("TEST CREATE PIPES");
-		return temp;
-	}
+    /*
+     * Method will generate pipes throughout the map. Spawning is currently set as 1
+     * UP facing pipe then 1 DOWN facing pipe then repeat. Although it's not
+     * spawning randomly, it can be changed by updating the "x" value or changing it
+     * entirely.
+     */
+    public Graphics createPipes() {
+        // Controls spawn behavior
+        Graphics temp;
+        int imgY;
+        if (x % 2 == 0) {
+            // Creates pipe images
+            imgY = rgen.nextInt(300, 500);
+            temp = new Graphics("pipeUp.png", 1024, imgY, WINDOW_HEIGHT, WINDOW_WIDTH);
 
-	// Method will draw pipes to the Main controller of the game.
-	public void drawPipes() {
-		g = createPipes();
-		g.draw(program);
-		System.out.println("TEST DRAW PIPES");
-	}
+            pipes.add(temp);
 
-	/*
-	 * Method will move the pipes to left. Pipespeed will determine the speed of the
-	 * pipe's movements. If the speed is not desired, change the value of pipespeed.
-	 * The higher the number, the faster of the movement TODO Probably needs to be
-	 * set in float or double to have a smoother movement.
-	 * 
-	 */
-	public void movePipeImages() {
-		for (Graphics p : pipes) {
-			System.out.println("x: " + p.getX() + "size: " + pipes.size());
-			p.changeLocation((int) p.getX() - pipeSpeed, (int) p.getY());
-			p.changeFloatLocation((float) p.getX() - pipeSpeed, (float) p.getY());
-		}
-		System.out.println("TEST MOVEMENT");
-	}
-	
-	public void resetMap() {
-		pipes.clear();
-		for(Graphics p : pipes) {
-			p.hideContents();
-		}
-		
-	}
-	
-	
-	//TEST COLLISION: DOES NOT WORK
-	public boolean checkCollision() {
-		for (Graphics p : pipes) {
-			if (bird.getY() == p.getY()) {
-				return true;
-			}
-		}
-		return false;
-	}
+        } else {
+            imgY = rgen.nextInt(-250, 5);
+            temp = new Graphics("pipeDown.png", 1024, imgY, WINDOW_HEIGHT, WINDOW_WIDTH);
+            pipes.add(temp);
+        }
+        x++;
+        System.out.println("TEST CREATE PIPES");
+        return temp;
+    }
+
+    // Method will draw pipes to the Main controller of the game.
+    public void drawPipes() {
+        g = createPipes();
+        g.draw(program);
+        System.out.println("TEST DRAW PIPES");
+    }
+
+    /*
+     * Method will move the pipes to left. Pipespeed will determine the speed of the
+     * pipe's movements. If the speed is not desired, change the value of pipespeed.
+     * The higher the number, the faster of the movement TODO Probably needs to be
+     * set in float or double to have a smoother movement.
+     * 
+     */
+    public void movePipeImages() {
+        for (Graphics p: pipes) {
+            System.out.println("x: " + p.getX() + "size: " + pipes.size());
+            p.changeLocation((int) p.getX() - pipeSpeed, (int) p.getY());
+            p.changeFloatLocation((float) p.getX() - pipeSpeed, (float) p.getY());
+        }
+        System.out.println("TEST MOVEMENT");
+    }
+
+    public void resetMap() {
+        pipes.clear();
+        for (Graphics p: pipes) {
+            p.hideContents();
+        }
+
+    }
+
+
+    //TEST COLLISION: DOES NOT WORK
+    public boolean checkPipeCollision() {
+        for (Graphics p: pipes) {
+            if (bird.getY() == p.getY()) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }
 
