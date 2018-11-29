@@ -69,7 +69,7 @@ public class PipeGeneration extends GraphicsProgram {
         } else {
             imgY = rgen.nextInt(-250, 5);
             temp = new Graphics("pipeDown.png", 1024, imgY, WINDOW_HEIGHT, WINDOW_WIDTH);
-            rect = new GRect(1024, imgY, 55, imgY + 400);
+            rect = new GRect(1024, imgY, 55, 280);
             gRectBehindPipe.add(rect);
             rect.setColor(Color.BLACK);
             rect.setFilled(true);
