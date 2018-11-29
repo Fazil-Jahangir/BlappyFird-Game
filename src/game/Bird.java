@@ -1,6 +1,11 @@
 package game;
 
+import java.awt.Color;
+import java.awt.Rectangle;
+
 import javax.swing.*;
+
+import acm.graphics.GOval;
 import acm.program.GraphicsProgram;
 
 /*
@@ -11,34 +16,38 @@ import acm.program.GraphicsProgram;
 public class Bird extends GraphicsProgram {
 	
 	//Declarations
-	//public float x, y;
-	//public float xspeed, yspeed;
 	private Physics p = new Physics();
 	private MainApplication program;
 	private Graphics g;
+	
+	public static Rectangle bounds;
 
-	//Screen Dimensions for Bird scaling
-	private static final int WINDOW_HEIGHT = 576;
-	private static final int WINDOW_WIDTH = 1024;
 
+
+	
 	public Bird(MainApplication app) {
 		program = app;
+		g = createBird();
+		//HITBOX FOR BIRD CHANGE LAST TWO VALUES
+		bounds = new Rectangle((int)p.x, (int)p.y, 70, 86);
+		
 	}
 	
 	public void drawBird() {
-		g = createBird();
 		g.draw(program);
-		System.out.println("TEST BIRD DRAW");
 	}
 	
-	/*
-	 * TODO
-	 * -Make the file flexible, doesn't have to always be the 'flappy bird'. Players should be able to choose what character they want to be.
-	 */
 	public Graphics createBird() {
 		Graphics temp;
-		temp = new Graphics("flappy-bird.png", 100, 250, WINDOW_HEIGHT, WINDOW_WIDTH);
+		temp = new Graphics("flappy-bird.png", 100, 250, 50, 50);
 		return temp;
+	}
+	//TEST BIRD BOUNDS
+	public void birdBounds() {
+		System.out.println("IMG Width " + g.getWidth());
+		System.out.println("IMG Height " + g.getHeight());
+		System.out.println("Bird Y: " + (g.getBounds().getY() + (int) p.getY()));
+		System.out.println("BIRD X:" + g.getBounds().getX());
 	}
 
 	/*
@@ -48,23 +57,24 @@ public class Bird extends GraphicsProgram {
 	public void birdJump() {
 		p.birdJump();
 		g.changeFloatLocation(p.getX(), p.getY());
-		System.out.println("BIRD JUMP");
+		bounds.setLocation((int)p.getX(),(int) p.getY());
+		//System.out.println("BIRD JUMP BOUNDS: " + bounds);
 	}
 
-	/*
-	 * 
-	 * 
-	 */
-
-	//MEthod will be in charge of 
+	//Method will be in charge of bird physics
 	public void birdPhysics() {
 		p.birdPhysics();
 		g.changeFloatLocation(p.getX(), p.getY());
-
+		bounds.setLocation((int)p.getX(),(int) p.getY());
+		//System.out.println("BIRD PHYSICS BOUNDS: " + bounds);
+	}
+	
+	public float birdGetX() {
+		return p.x;
 	}
 	
 	public float birdGetY() {
-		System.out.println("Y VALUE: " + p.y);
+		//System.out.println("Y VALUE: " + p.y);
 		return p.y;
 	}
 	
@@ -73,6 +83,44 @@ public class Bird extends GraphicsProgram {
 		p.setY(100);
 		g.hideContents();
 	}
+	
+	public Rectangle getBounds() {
+		return bounds;
+    }
+	
+	
+	/*public Rectangle getBirdTop() {
+	int x = (int) g.getBounds().getX();
+	int y = (int) (g.getBounds().getY() + p.getY());
+	int width = 30;
+	int height = 150;
+	Rectangle top = new Rectangle(x,y,width,height);
+	//System.out.println(top);
+	return top;
+}
+public Rectangle getBirdRightSide() {
+	int x = (int) g.getBounds().getX();
+	int y = (int) (g.getBounds().getY() + p.getY());
+	int width = (int) g.getWidth();
+	int height = (int) g.getHeight();
+	Rectangle middle = new Rectangle(x,y,width,height);
+	return middle;
+}
+
+public Rectangle getBirdBottom() {
+	int x = (int) g.getBounds().getX();
+	int y = (int) (g.getBounds().getY() + p.getY());
+	int width = (int) g.getBounds().getWidth();
+	int height = (int) g.getBounds().getHeight();
+	Rectangle bottom = new Rectangle(x,y,width,height);
+	return bottom;
+}*/
+	
+	
+}
+	
+	
+	
 
 	// resetBirdLocation() will reset the bird's location to original
 	/*public void resetBirdLocation() {
@@ -85,4 +133,4 @@ public class Bird extends GraphicsProgram {
 	
 
 	
-}
+

@@ -64,17 +64,20 @@ public class GameTest extends GraphicsPane implements ActionListener {
         // Delay timer while bird flies through empty space
         scoreTimer.setInitialDelay(1000 / 60 * 320);
         scoreTimer.start();
-
         bird.drawBird();
+        
     }
-
+    
+    /*
+     * movePipesImages has been made to return a boolean, still functions for moving pipe, but returns a boolean if there's a collision.
+     */
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == timer) {
             if (gameEnded != false) {
                 scrollingBackground();
 
                 // Checks if the bird hits the ground
-                if (bird.birdGetY() >= WINDOW_HEIGHT) {
+                if (bird.birdGetY() >= WINDOW_HEIGHT || pipes.movePipeImages()) {
                     System.out.println("\nCOLLISION DETECTED! @ Bottom of screen... calling endGame() now");
                     endGame();
                 }
@@ -85,9 +88,10 @@ public class GameTest extends GraphicsPane implements ActionListener {
                     pipes.drawPipes();
                 }
                 // TODO: Checks if bird hits a pipe
-                pipes.movePipeImages();
+                //pipes.movePipeImages();
                 bird.birdPhysics();
-                //pipes.checkPipeCollision();
+                
+                
             }
         }
 
@@ -107,8 +111,6 @@ public class GameTest extends GraphicsPane implements ActionListener {
         // Bird Jump on Space bar press
         if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             program.remove(beginInstructions);
-
-            System.out.println("\nSPACEBAR pressed - calling jump()");
             gameEnded = true;
             bird.birdJump();
         }
@@ -189,13 +191,13 @@ public class GameTest extends GraphicsPane implements ActionListener {
         // Moves background image:
         if (background1.getX() > -1260) {
             background1.changeLocation(background1.getX() - backgroundSpeed, background1.getY());
-            System.out.println("BACKGROUND1x: " + background1.getX());
+            //System.out.println("BACKGROUND1x: " + background1.getX());
         } else {
             background1.changeLocation(1260, background1.getY());
         }
         if (background2.getX() > -1260) {
             background2.changeLocation(background2.getX() - backgroundSpeed, background2.getY());
-            System.out.println("BACKGROUND2x: " + background2.getX());
+            //System.out.println("BACKGROUND2x: " + background2.getX());
         } else {
             background2.changeLocation(1260, background2.getY());
         }

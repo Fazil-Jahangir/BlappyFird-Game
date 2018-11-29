@@ -15,11 +15,13 @@ public class Physics {
 	public float vx;
 	public float vy;
 
+	
 	// Constructor for physics. Values also determine the starting position of the
 	// bird as well.
 	public Physics() {
 		x = 100;
 		y = 100;
+
 	}
 
 	// Getters
@@ -50,7 +52,8 @@ public class Physics {
 		x += vx;
 		y += vy;
 		vy += 0.5f;
-		System.out.println("x: " + x + "\ny: " + y);
+		//System.out.println("x: " + x + "\ny: " + y);
 	}
+	
 
 }

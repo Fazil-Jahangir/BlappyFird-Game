@@ -1,5 +1,7 @@
 package game;
 
+import java.awt.Rectangle;
+
 import acm.graphics.GImage;
 
 public class Graphics {
@@ -11,6 +13,7 @@ public class Graphics {
 	private GImage img;
 	private MainApplication program;
 	private GameTest game;
+	public Rectangle hitBox;
 
 	public Graphics(String fileLocation, int x, int y, int height, int width) {
 		this.fileLocation = fileLocation;
@@ -18,6 +21,8 @@ public class Graphics {
 		this.y = y;
 		this.height = height;
 		this.width = width;
+		img = new GImage(fileLocation, x, y);
+		hitBox = new Rectangle();
 	}
 
 	/*
@@ -71,14 +76,25 @@ public class Graphics {
 	public double getY() {
 		return img.getY();
 	}
-
+	
+	/*
 	public int getHeight() {
 		return height;
 	}
 
 	public int getWidth() {
 		return width;
+	}*/
+	
+	public double getHeight() {
+		return img.getHeight();
 	}
+	
+	public double getWidth() {
+		return img.getWidth();
+	}
+	
+	
 
 	public void showContents() {
 		program.add(img);
@@ -92,4 +108,10 @@ public class Graphics {
 	public void hideContents() {
 		program.remove(img);
 	}
+	
+	public Rectangle getBounds() {
+		hitBox = new Rectangle(x, y, width, height);
+		return hitBox;
+	}
+	
 }
