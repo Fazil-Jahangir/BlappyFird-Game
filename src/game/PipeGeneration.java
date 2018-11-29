@@ -132,7 +132,7 @@ public class PipeGeneration extends GraphicsProgram {
     			}
     		}
     	}
-    	/*
+    	
         for (Graphics p: pipes) {
         	for (GObject r: gRectBehindPipe) {
         		double pipeYDouble = p.getY();
@@ -144,8 +144,8 @@ public class PipeGeneration extends GraphicsProgram {
         	}
 
         }
-        */
-    }
+        
+    }*/
 
 }
 
