@@ -11,13 +11,14 @@ import acm.graphics.GLabel;
 public class Instructions extends GraphicsPane {
 	private MainApplication program;
 	
-	private GImage spaceBar = new GImage("spacebar.png", (MainApplication.WINDOW_WIDTH/2) - 60, 250);
-	private GLabel title = new GLabel("INSTRUCTIONS", (MainApplication.WINDOW_WIDTH/2) - 150, 150);
-	private GLabel esc = new GLabel("ESC RETURN TO MENU", 0, 20);
-	private GLabel instructions = new GLabel("Press Space to Fly/Jump", (MainApplication.WINDOW_WIDTH/2) - 150, 400);
-	private GLabel instructions1 = new GLabel("Your goal is to avoid hitting the pipes. Survive as long as you can", (MainApplication.WINDOW_WIDTH/2) - 400, 450);
-	
-	public static GImage background = new GImage("menu.png", 0, 0);
+	private GImage spaceBar = new GImage("spacebar.png", (MainApplication.WINDOW_WIDTH/2) - 280, 230);
+	private GImage escape = new GImage("escape.png", (MainApplication.WINDOW_WIDTH/2) + 200, 230);
+	private GLabel title = new GLabel("INSTRUCTIONS", (MainApplication.WINDOW_WIDTH/2) - 150, 200);
+	private GLabel esc = new GLabel("Press Esc to MENU/PAUSE", (MainApplication.WINDOW_WIDTH/2) + 100, 350);
+	private GLabel instructions = new GLabel("Press Space to Fly/Jump", (MainApplication.WINDOW_WIDTH/2) - 400, 350);
+	private GLabel instructions1 = new GLabel("Objective: Your goal is to avoid hitting the pipes.", (MainApplication.WINDOW_WIDTH/2) - 380, 450);
+	private GLabel instructions2 = new GLabel("Survive as long as you can! Earn most points!", (MainApplication.WINDOW_WIDTH/2) - 230, 485);
+	public static GImage background = new GImage("settings.png", 0, 0);
 	
 	public Instructions(MainApplication app) {
 		program = app;
@@ -32,20 +33,24 @@ public class Instructions extends GraphicsPane {
 	public void showContents() {
 		program.add(background);
 		program.add(spaceBar);
+		program.add(escape);
 		program.add(title);
 		program.add(esc);
 		program.add(instructions);
 		program.add(instructions1);
+		program.add(instructions2);
 		
 	}
 
 	@Override
 	public void hideContents() {
+		program.remove(escape);
 		program.remove(spaceBar);
 		program.remove(title);
 		program.remove(esc);
 		program.remove(instructions);
 		program.remove(instructions1);
+		program.remove(instructions2);
 		program.remove(background);
 	}
 	
@@ -65,6 +70,8 @@ public class Instructions extends GraphicsPane {
 		instructions.setColor(Color.WHITE);
 		instructions1.setColor(Color.WHITE);
 		instructions1.setFont(new Font("Showcard Gothic", Font.BOLD, 24));
+		instructions2.setColor(Color.WHITE);
+		instructions2.setFont(new Font("Showcard Gothic", Font.BOLD, 24));
 		instructions.setFont(new Font("Showcard Gothic", Font.BOLD, 24));
 	}
 	

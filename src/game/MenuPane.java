@@ -28,8 +28,6 @@ public class MenuPane extends GraphicsPane {
 			label.setColor(Color.WHITE);
 			label.setFont(new Font("Showcard Gothic", Font.BOLD, 35));
 			gLabel.add(label);
-			System.out.println("LabelY: " + label.getY());
-			System.out.println("MenuBoxY: " + menuBox.getY());
 		}
 	}
 
@@ -93,8 +91,6 @@ public class MenuPane extends GraphicsPane {
 		Color highlightColor = new Color(r, g, b);
 		if (obj == label || label.getY() == menuBox.getY() + 43) 
 		{
-			System.out.println("LabelY: " + label.getY());
-			System.out.println("MenuBoxY: " + menuBox.getY());
 			menuBox.setLocation(0, label.getY()-43);
 			label.setColor(highlightColor);
 		} 

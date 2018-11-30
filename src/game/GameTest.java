@@ -22,6 +22,7 @@ public class GameTest extends GraphicsPane implements ActionListener {
     private int backgroundSpeed = 2;
     private int score;
     private int oneSecond = (1000 / 60);
+    private int pipeSpawn = 50;
     
     private boolean endGameChecker = false;
     private boolean gameEnded = false;
@@ -86,7 +87,7 @@ public class GameTest extends GraphicsPane implements ActionListener {
 
                 // Manages the pipe spacing on x-axis
                 NUMTIME++;
-                if (NUMTIME % 35 == 0) {
+                if (NUMTIME % pipeSpawn == 0) {
                     pipes.drawPipes();
                 }
                 // TODO: Checks if bird hits a pipe
@@ -99,9 +100,14 @@ public class GameTest extends GraphicsPane implements ActionListener {
 
         if (e.getSource() == scoreTimer) {
             if (gameEnded != false) {
-                if (scoreDisplayed == true) {
+            	if (scoreDisplayed == true && score % 6 == 0) {
+                	pipes.increasePipeSpeed();
+                	pipeSpawn -= 10;
                     removeScoreDisplay();
                 }
+            	else if (scoreDisplayed == true) {
+                    removeScoreDisplay();
+                }                
                 scoreManager();
             }
         }
@@ -326,6 +332,8 @@ public class GameTest extends GraphicsPane implements ActionListener {
         timer.restart();
         scoreTimer.restart();
         bird.drawBird();
+        pipeSpawn = 50;
+        pipes.setPipeSpeed(5);
     }
 
     public void reset() {

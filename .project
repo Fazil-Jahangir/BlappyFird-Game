@@ -14,4 +14,11 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>media/escape.png</name>
+			<type>1</type>
+			<location>C:/Users/Owner/git/group-project-osvaldo-s-sons/media/escape.png</location>
+		</link>
+	</linkedResources>
 </projectDescription>

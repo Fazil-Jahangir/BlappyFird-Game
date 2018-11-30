@@ -127,5 +127,20 @@ public class PipeGeneration extends GraphicsProgram {
         x = 0;
 
     }
+    
+    public void increasePipeSpeed()
+    {
+    	pipeSpeed++;
+    }
+    
+    public void setPipeSpeed(int x)
+    {
+		pipeSpeed = x;    	
+    }
+    
+    public int getPipeSpeed()
+    {
+    	return pipeSpeed;
+    }
 
 }
