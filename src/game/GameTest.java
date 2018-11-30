@@ -14,7 +14,6 @@ import javax.swing.Timer;
 
 import acm.graphics.*;
 //import acm.graphics.GOval;
-import acm.program.*;
 
 public class GameTest extends GraphicsPane implements ActionListener {
 
@@ -55,14 +54,14 @@ public class GameTest extends GraphicsPane implements ActionListener {
         bird = new Bird(app);
         pipes = new PipeGeneration(app);
         timer = new Timer(oneSecond, this);
-        scoreTimer = new Timer(oneSecond * 80, this);
+        scoreTimer = new Timer(oneSecond * 60, this);
         gameEnded = false;
 
         beginGameInstructions();
         timer.start();
 
         // Delay timer while bird flies through empty space
-        scoreTimer.setInitialDelay(1000 / 60 * 320);
+        scoreTimer.setInitialDelay(oneSecond * 285);
         scoreTimer.start();
         bird.drawBird();
         
@@ -207,8 +206,8 @@ public class GameTest extends GraphicsPane implements ActionListener {
         if (paused == false)
             score++;
 
-        scoreDisplay = new GLabel(Integer.toString(score), WINDOW_WIDTH / 2 - 200, WINDOW_HEIGHT / 2 - 80);
-        scoreDisplay.setFont(new Font("Algerian", Font.BOLD, 30));
+        scoreDisplay = new GLabel(Integer.toString(score), WINDOW_WIDTH / 2 - 50, WINDOW_HEIGHT / 2 - 150);
+        scoreDisplay.setFont(new Font("Algerian", Font.BOLD, 62));
         scoreDisplay.setColor(Color.WHITE);
         program.add(scoreDisplay);
 
