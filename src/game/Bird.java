@@ -29,7 +29,7 @@ public class Bird extends GraphicsProgram {
 		program = app;
 		g = createBird();
 		//HITBOX FOR BIRD CHANGE LAST TWO VALUES
-		bounds = new Rectangle((int)p.x, (int)p.y, 70, 86);
+		bounds = new Rectangle((int)p.x, (int)p.y, 60, 57);
 		
 	}
 	
