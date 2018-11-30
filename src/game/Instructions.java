@@ -11,14 +11,15 @@ import acm.graphics.GLabel;
 public class Instructions extends GraphicsPane {
 	private MainApplication program;
 	
-	private GImage spaceBar = new GImage("spacebar.png", (MainApplication.WINDOW_WIDTH/2) - 280, 230);
-	private GImage escape = new GImage("escape.png", (MainApplication.WINDOW_WIDTH/2) + 200, 230);
-	private GLabel title = new GLabel("INSTRUCTIONS", (MainApplication.WINDOW_WIDTH/2) - 150, 200);
-	private GLabel esc = new GLabel("Press Esc to MENU/PAUSE", (MainApplication.WINDOW_WIDTH/2) + 100, 350);
-	private GLabel instructions = new GLabel("Press Space to Fly/Jump", (MainApplication.WINDOW_WIDTH/2) - 400, 350);
-	private GLabel instructions1 = new GLabel("Objective: Your goal is to avoid hitting the pipes.", (MainApplication.WINDOW_WIDTH/2) - 380, 450);
-	private GLabel instructions2 = new GLabel("Survive as long as you can! Earn most points!", (MainApplication.WINDOW_WIDTH/2) - 230, 485);
 	public static GImage background = new GImage("settings.png", 0, 0);
+	private GImage spaceBar = new GImage("spacebar.png", (MainApplication.WINDOW_WIDTH/2) - 280, 180);
+	private GImage escape = new GImage("escape.png", (MainApplication.WINDOW_WIDTH/2) + 200, 170);
+	private GLabel title = new GLabel("Instructions", 220, 100);
+	private GLabel esc = new GLabel("Press Esc to MENU/PAUSE", (MainApplication.WINDOW_WIDTH/2) + 100, 300);
+	private GLabel instructions = new GLabel("Press Space to Fly/Jump", (MainApplication.WINDOW_WIDTH/2) - 400, 300);
+	private GLabel instructions1 = new GLabel("Objective: Your goal is to avoid hitting the pipes.", (MainApplication.WINDOW_WIDTH/2) - 380, 400);
+	private GLabel instructions2 = new GLabel("Survive as long as you can! Earn points!", (MainApplication.WINDOW_WIDTH/2) - 240, 435);
+
 	
 	public Instructions(MainApplication app) {
 		program = app;
@@ -62,21 +63,21 @@ public class Instructions extends GraphicsPane {
 	}
 	
 	public void setEsc() {
-		esc.setColor(Color.WHITE);
-		esc.setFont(new Font("Showcard Gothic", Font.BOLD, 24));
+		esc.setColor(Color.BLACK);
+		esc.setFont(new Font("Verdana", Font.PLAIN, 24));
 	}
 	
 	public void setInstructions() {
-		instructions.setColor(Color.WHITE);
-		instructions1.setColor(Color.WHITE);
-		instructions1.setFont(new Font("Showcard Gothic", Font.BOLD, 24));
-		instructions2.setColor(Color.WHITE);
-		instructions2.setFont(new Font("Showcard Gothic", Font.BOLD, 24));
-		instructions.setFont(new Font("Showcard Gothic", Font.BOLD, 24));
+		instructions.setColor(Color.BLACK);
+		instructions1.setColor(Color.BLACK);
+		instructions1.setFont(new Font("Verdana", Font.PLAIN, 24));
+		instructions2.setColor(Color.BLACK);
+		instructions2.setFont(new Font("Verdana", Font.PLAIN, 24));
+		instructions.setFont(new Font("Verdana", Font.PLAIN, 24));
 	}
 	
 	public void setTitle() {
-		title.setColor(Color.WHITE);
-		title.setFont(new Font("Showcard Gothic", Font.BOLD, 35));
+		title.setFont(new Font("Algerian", Font.BOLD, 75));
+		title.setColor(Color.BLACK);
 	}
 }

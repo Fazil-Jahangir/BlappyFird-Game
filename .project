@@ -20,5 +20,20 @@
 			<type>1</type>
 			<location>C:/Users/Owner/git/group-project-osvaldo-s-sons/media/escape.png</location>
 		</link>
+		<link>
+			<name>media/sounds/menuBeat.wav</name>
+			<type>1</type>
+			<location>C:/Users/Owner/git/group-project-osvaldo-s-sons/media/sounds/menuBeat.wav</location>
+		</link>
+		<link>
+			<name>media/sounds/sfx_point1.5.wav</name>
+			<type>1</type>
+			<location>C:/Users/Owner/git/group-project-osvaldo-s-sons/media/sounds/sfx_point1.5.wav</location>
+		</link>
+		<link>
+			<name>media/sounds/sfx_wing1.6.wav</name>
+			<type>1</type>
+			<location>C:/Users/Owner/git/group-project-osvaldo-s-sons/media/sounds/sfx_wing1.6.wav</location>
+		</link>
 	</linkedResources>
 </projectDescription>

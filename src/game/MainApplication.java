@@ -1,6 +1,7 @@
 package game;
 
 import acm.graphics.GImage;
+import game.AudioPlayer;
 
 public class MainApplication extends GraphicsApplication {
 	/**
@@ -12,6 +13,8 @@ public class MainApplication extends GraphicsApplication {
 	public static final int WINDOW_WIDTH = 1000;
 	public static final int BUTTON_HEIGHT = 250;
 	public static final int BUTTON_WIDTH = 50;
+	
+	public static boolean isSoundOn = true;
 
 	private MenuPane menuPane;
 	private StorePane storePane;
@@ -31,10 +34,14 @@ public class MainApplication extends GraphicsApplication {
 		settingsPane = new SettingsPane(this);
 		gamePane = new GameTest(this);
 		instructions = new Instructions(this);
-		switchToScreen(menuPane);
+		switchToMenu();
 	}
 
 	public void switchToMenu() {
+		AudioPlayer audio = AudioPlayer.getInstance();
+		if (isSoundOn) {
+			audio.playSound("sounds", "menuBeat.wav");
+		}
 		switchToScreen(menuPane);
 	}
 
@@ -47,11 +54,16 @@ public class MainApplication extends GraphicsApplication {
 	}
 	
 	public void switchToGame() {
+		muteSound();
 		switchToScreen(gamePane);
 	}
 	
 	public void switchToInstructions() {
 		switchToScreen(instructions);
 	}
-		
+	
+	public void muteSound() {
+		AudioPlayer audio = AudioPlayer.getInstance();
+		audio.stopSound("sounds", "menuBeat.wav");
+	}		
 }

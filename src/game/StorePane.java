@@ -9,7 +9,7 @@ import acm.graphics.GLabel;
 public class StorePane extends GraphicsPane {
 	private MainApplication program;
 	private GImage storeImage = new GImage("store.png", 0, 0);
-	private GLabel storeLabel = new GLabel("Store", 350, 75);
+	private GLabel storeLabel = new GLabel("Store", 350, 100);
 
 	public StorePane(MainApplication app) {
 		this.program = app;

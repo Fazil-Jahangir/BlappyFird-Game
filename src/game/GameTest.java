@@ -11,7 +11,7 @@ import java.awt.event.*;
 import javax.swing.Timer;
 
 import acm.graphics.*;
-import starter.AudioPlayer;
+import game.AudioPlayer;
 
 public class GameTest extends GraphicsPane implements ActionListener {
 
@@ -103,9 +103,11 @@ public class GameTest extends GraphicsPane implements ActionListener {
             	if (scoreDisplayed == true && score % 6 == 0) {
                 	pipes.increasePipeSpeed();
                 	pipeSpawn -= 10;
-                    removeScoreDisplay();
+                	audio.playSound("sounds", "sfx_point1.5.wav", false);
+                    removeScoreDisplay();                    
                 }
             	else if (scoreDisplayed == true) {
+            		audio.playSound("sounds", "sfx_point1.5.wav", false);
                     removeScoreDisplay();
                 }                
                 scoreManager();
@@ -121,8 +123,10 @@ public class GameTest extends GraphicsPane implements ActionListener {
             program.remove(beginInstructions);
             gameEnded = true;
             bird.birdJump();
-            
-            audio.playSound("sounds", "fart.wav", false);
+            if(endGameChecker == false)
+            {
+            	audio.playSound("sounds", "sfx_wing1.6.wav", false);
+            }            	
         }
 
         // Exit Pause menu
@@ -235,8 +239,8 @@ public class GameTest extends GraphicsPane implements ActionListener {
      * at beginning of the game
      */
     public void beginGameInstructions() {
-        beginInstructions = new GLabel("PRESS SPACEBAR TO BEGIN", WINDOW_WIDTH / 2 - 200, WINDOW_HEIGHT / 2);
-        beginInstructions.setFont(new Font("Algerian", Font.BOLD, 26));
+        beginInstructions = new GLabel("PRESS [SPACEBAR] TO BEGIN", WINDOW_WIDTH / 2 - 280, WINDOW_HEIGHT / 2 + 25);
+        beginInstructions.setFont(new Font("Showcard Gothic", Font.BOLD, 40));
         beginInstructions.setColor(Color.WHITE);
         program.add(beginInstructions);
     }
@@ -276,6 +280,7 @@ public class GameTest extends GraphicsPane implements ActionListener {
     }
 
     public void endGame() {
+    	audio.playSound("sounds", "sfx_hit.wav", false);  
         System.out.println("	endGame() called\n");
         gameEnded = true;
         endGameChecker = true;
