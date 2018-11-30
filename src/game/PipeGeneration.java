@@ -1,11 +1,8 @@
 package game;
 
-import java.awt.Color;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import acm.util.RandomGenerator;
-import acm.graphics.GObject;
-import acm.graphics.GRect;
 import acm.program.GraphicsProgram;
 
 /**
@@ -17,17 +14,13 @@ import acm.program.GraphicsProgram;
  */
 
 public class PipeGeneration extends GraphicsProgram {
-    // Window Dimensions
-    //private static final int WINDOW_HEIGHT = 576;
-    //private static final int WINDOW_WIDTH = 1024;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
-    // Store pipes in an ArrayList.
-    private ArrayList < Graphics > pipes;
-    //private ArrayList < GRect > gRectBehindPipe;
-    private ArrayList < Rectangle > pipesTopRect;
-    private ArrayList< Rectangle > pipesBotRect;
+	private ArrayList < Graphics > pipes;
 
-    // Declarations
     private int pipeSpeed = 5;
     private Graphics g;
     private int x = 0;
@@ -35,21 +28,15 @@ public class PipeGeneration extends GraphicsProgram {
     private Rectangle boundsTop;
     private Rectangle boundsBot;
     
-
     private RandomGenerator rgen;
-    private Bird bird;
 
-
-    // Constructor
     public PipeGeneration(MainApplication app) {
         program = app;
         rgen = RandomGenerator.getInstance();
+        
         pipes = new ArrayList < Graphics > ();
-        pipesTopRect = new ArrayList<Rectangle>();
-        pipesBotRect = new ArrayList<Rectangle>();
         boundsTop = new Rectangle();
         boundsBot = new Rectangle();
-        bird = new Bird(app);
     }
 
     /*
@@ -59,36 +46,26 @@ public class PipeGeneration extends GraphicsProgram {
      * entirely.
      */
     public Graphics createPipes() {
-        // Controls spawn behavior
+        // Controls pipe spawn behavior
         Graphics temp;
         int imgY;
         if (x % 2 == 0) {
             // Creates pipe images
             imgY = rgen.nextInt(300, 500);
             temp = new Graphics("pipeUp.png", 1024, imgY, 280, 60);
-            /*rect = new GRect(1024, imgY, 55, imgY + 400);
-            gRectBehindPipe.add(rect);
-            rect.setColor(Color.BLACK);
-            rect.setFilled(true);
-            rect.setVisible(true);
-            program.add(rect);*/
+
             boundsTop = new Rectangle((int)temp.getX(),(int) temp.getY(), (int) temp.getWidth(),(int)temp.getHeight());
             pipes.add(temp);
 
         } else {
             imgY = rgen.nextInt(-250, 5);
             temp = new Graphics("pipeDown.png", 1024, imgY, 280, 60);
-            /*rect = new GRect(1024, imgY, 55, 280);
-            gRectBehindPipe.add(rect);
-            rect.setColor(Color.BLACK);
-            rect.setFilled(true);
-            rect.setVisible(true);
-            program.add(rect);*/
+
             boundsBot = new Rectangle((int)temp.getX(),(int) temp.getY(), (int) temp.getWidth(),(int)temp.getHeight());
             pipes.add(temp);
         }
         x++;
-        //System.out.println("TEST CREATE PIPES: ");
+
         return temp;
     }
 
@@ -96,7 +73,6 @@ public class PipeGeneration extends GraphicsProgram {
     public void drawPipes() {
         g = createPipes();
         g.draw(program);
-        
     }
 
     /*
@@ -107,7 +83,7 @@ public class PipeGeneration extends GraphicsProgram {
      * 
      */
     /*
-     * (SETH) Had to changeLocations, just made it easier and used int method of changeLocation. Was this below...
+     * @SETH - Had to changeLocations, just made it easier and used int method of changeLocation. Was this below...
      *  p.changeLocation((int) p.getX() - pipeSpeed, (int) p.getY());
      *  p.changeFloatLocation((float) p.getX() - pipeSpeed, , (float) p.getY());
      */
@@ -118,26 +94,18 @@ public class PipeGeneration extends GraphicsProgram {
             p.changeLocation(positionX, positionY);
 			if (p.getfileLocation().equals("pipeUp.png")) {
 				boundsBot.setLocation((int)p.getX(),(int) p.getY());
-				//System.out.println("TEST BOT BOUNDS: " + boundsBot.getBounds());
 			} else {
 				boundsTop.setLocation((int)p.getX(),(int) p.getY());
-				//System.out.println("TEST TOP BOUNDS: " + boundsTop.getBounds());
 			}
 			if(collision(Bird.bounds)) {
 				return true;
 			}
 		}
     	return false;
-    	/*
-    	 * for (GObject r : gRectBehindPipe) {
-        	r.move(-4.001, 0);
-        }
-    	 */
     }
     
     //Checks collision with Bird bounds
     public boolean collision(Rectangle bird) {
-    	//return bird.intersects(boundsBot) || bird.intersects(boundsTop);
     	if(bird.intersects(boundsBot)) {
     		System.out.println("HIT BOT PIPE");
     		return true;
@@ -150,7 +118,6 @@ public class PipeGeneration extends GraphicsProgram {
     		return false;
     	}
     }
-    
 
     public void resetMap() {
         pipes.clear();
@@ -161,27 +128,4 @@ public class PipeGeneration extends GraphicsProgram {
 
     }
 
-
-
 }
-
-/*
- * public void checkPipeCollision() {   
-    	for (GRect r : gRectBehindPipe) {
-    		
-    		//System.out.println(bird.birdGetX());
-    		GRect gr = new GRect(bird.birdGetX(), bird.birdGetY(), 10, 10);
-    		gr.setColor(Color.BLACK);
-    		gr.setFilled(true);
-    		gr.setVisible(true);
-            program.add(gr);
-
-    		if (r.getBounds().intersects(bird.getBirdTop())) {
-    			System.out.println("Collided top of bird");
-    			//game.endGame();
-    		}
-
-    	}
-    }
- *
- */

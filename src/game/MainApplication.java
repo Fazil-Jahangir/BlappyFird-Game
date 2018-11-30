@@ -1,11 +1,13 @@
 package game;
 
-import java.awt.Color;
 import acm.graphics.GImage;
-import acm.graphics.GObject;
-import acm.graphics.GRect;
 
 public class MainApplication extends GraphicsApplication {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	public static final int WINDOW_HEIGHT = 535;
 	public static final int WINDOW_WIDTH = 1000;
 	public static final int BUTTON_HEIGHT = 250;

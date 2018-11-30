@@ -6,14 +6,12 @@ package game;
 
 import java.awt.Color;
 import java.awt.Font;
-//import java.awt.Color;
 import java.awt.event.*;
 
 import javax.swing.Timer;
-//import acm.util.RandomGenerator;
 
 import acm.graphics.*;
-//import acm.graphics.GOval;
+import starter.AudioPlayer;
 
 public class GameTest extends GraphicsPane implements ActionListener {
 
@@ -46,6 +44,8 @@ public class GameTest extends GraphicsPane implements ActionListener {
     
     private GButton restartGameButton;
     private GButton exitToMainMenuButton;
+    
+    private AudioPlayer audio;
 
     public GameTest(MainApplication app) {
         program = app;
@@ -56,6 +56,8 @@ public class GameTest extends GraphicsPane implements ActionListener {
         timer = new Timer(oneSecond, this);
         scoreTimer = new Timer(oneSecond * 60, this);
         gameEnded = false;
+        
+        audio = new AudioPlayer();
 
         beginGameInstructions();
         timer.start();
@@ -72,7 +74,8 @@ public class GameTest extends GraphicsPane implements ActionListener {
      */
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == timer) {
-            if (gameEnded != false) {
+            //if (gameEnded != false) {
+        	if (gameEnded) {
                 scrollingBackground();
 
                 // Checks if the bird hits the ground
@@ -112,6 +115,8 @@ public class GameTest extends GraphicsPane implements ActionListener {
             program.remove(beginInstructions);
             gameEnded = true;
             bird.birdJump();
+            
+            audio.playSound("sounds", "fart.wav", false);
         }
 
         // Exit Pause menu
@@ -334,23 +339,4 @@ public class GameTest extends GraphicsPane implements ActionListener {
         background1.hideContents();
         background2.hideContents();
     }
-
-
-    /*
-    public boolean itemsCollisionTest(GImage image) {
-    	return (monkey.getY() - image.getY() <= Y_MONKEY_COLLISION
-    			&& monkey.getY() - image.getY() >= -Y_MONKEY_COLLISION
-    			&& monkey.getX() - image.getX() <= X_MONKEY_COLLISION
-    			&& monkey.getX() - image.getX() >= -X_MONKEY_COLLISION);
-    }
-	
-    public void checkForCollision() {
-    	for (Items item : listOfItems)
-    		if (item.getGImage().isVisible() && itemsCollisionTest(item.getGImage())) {
-    			checkForTypeScore(item);
-    			item.getGImage().setVisible(false);
-    		}
-    }
-    */
-
 }

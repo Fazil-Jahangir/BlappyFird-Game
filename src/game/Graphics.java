@@ -5,15 +5,16 @@ import java.awt.Rectangle;
 import acm.graphics.GImage;
 
 public class Graphics {
-	private String fileLocation;
+	public Rectangle hitBox;
+	
 	private int x;
 	private int y;
 	private int width;
 	private int height;
+	private String fileLocation;
+	
 	private GImage img;
 	private MainApplication program;
-	private GameTest game;
-	public Rectangle hitBox;
 
 	public Graphics(String fileLocation, int x, int y, int height, int width) {
 		this.fileLocation = fileLocation;
@@ -24,22 +25,10 @@ public class Graphics {
 		img = new GImage(fileLocation, x, y);
 		hitBox = new Rectangle();
 	}
-
-	/*
-	 * TODO: Add the bird to 0,0 location, we may need to think about using an
-	 * instance variable here
-	 */
 	public void draw(MainApplication app) {
 		this.program = app;
 		img = new GImage(fileLocation, x, y);
 		showContents();
-	}
-
-	// GameTest
-	public void draw(GameTest g) {
-		this.game = g;
-		img = new GImage(fileLocation, x, y);
-		//showContentsGame();
 	}
 
 	// Setters:
@@ -77,15 +66,6 @@ public class Graphics {
 		return img.getY();
 	}
 	
-	/*
-	public int getHeight() {
-		return height;
-	}
-
-	public int getWidth() {
-		return width;
-	}*/
-	
 	public double getHeight() {
 		return img.getHeight();
 	}
@@ -94,17 +74,11 @@ public class Graphics {
 		return img.getWidth();
 	}
 	
-	
 
 	public void showContents() {
 		program.add(img);
 	}
-
-	// TEST
-	/*public void showContentsGame() {
-		game.add(img);
-	}*/
-
+	
 	public void hideContents() {
 		program.remove(img);
 	}
@@ -113,5 +87,4 @@ public class Graphics {
 		hitBox = new Rectangle(x, y, width, height);
 		return hitBox;
 	}
-	
 }

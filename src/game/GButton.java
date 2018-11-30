@@ -2,21 +2,18 @@ package game;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.FontFormatException;
-import java.awt.GraphicsEnvironment;
-import java.awt.event.ActionEvent;
-import java.io.File;
-import java.io.IOException;
 
 import acm.graphics.GCompound;
 import acm.graphics.GLabel;
 import acm.graphics.GRoundRect;
-import javafx.scene.control.Label;
 
 public class GButton extends GCompound {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private GRoundRect rect;
 	private GLabel message;
-	private Font customFont;
 
 	public GButton(String label, double x, double y, double width, double height) {
 		this(label, x, y, width, height, Color.BLACK);
@@ -59,8 +56,6 @@ public class GButton extends GCompound {
 	}
 
 	public void setCustomFont() {
-		// message.setFont(customFont);
-		// message.setFont(new Font("Castellar", Font.BOLD, 35));
 		message.setFont(new Font("Showcard Gothic", Font.BOLD, 35));
 	}
 }

@@ -5,6 +5,11 @@ import java.awt.event.MouseEvent;
 import acm.program.GraphicsProgram;
 
 public abstract class GraphicsApplication extends GraphicsProgram {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private GraphicsPane curScreen;
 
 	public GraphicsApplication() {

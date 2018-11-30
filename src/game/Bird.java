@@ -1,11 +1,7 @@
 package game;
 
-import java.awt.Color;
 import java.awt.Rectangle;
 
-import javax.swing.*;
-
-import acm.graphics.GOval;
 import acm.program.GraphicsProgram;
 
 /*
@@ -14,26 +10,26 @@ import acm.program.GraphicsProgram;
  * Make another enum class to choose different skins. *DO LATER*
  */
 public class Bird extends GraphicsProgram {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
-	//Declarations
 	private Physics p = new Physics();
 	private MainApplication program;
 	private Graphics g;
 	
 	public static Rectangle bounds;
-
-
-	
 	
 	public Bird(MainApplication app) {
 		program = app;
 		g = createBird();
+		
 		//HITBOX FOR BIRD CHANGE LAST TWO VALUES
 		bounds = new Rectangle((int)p.x, (int)p.y, 60, 57);
 		
 	}
-	
-	
+
 	public void drawBird() {
 		g.draw(program);
 	}
@@ -43,7 +39,7 @@ public class Bird extends GraphicsProgram {
 		temp = new Graphics("flappy-bird.png", 100, 250, 50, 50);
 		return temp;
 	}
-	//TEST BIRD BOUNDS
+	
 	public void birdBounds() {
 		System.out.println("IMG Width " + g.getWidth());
 		System.out.println("IMG Height " + g.getHeight());
@@ -59,7 +55,6 @@ public class Bird extends GraphicsProgram {
 		p.birdJump();
 		g.changeFloatLocation(p.getX(), p.getY());
 		bounds.setLocation((int)p.getX(),(int) p.getY());
-		//System.out.println("BIRD JUMP BOUNDS: " + bounds);
 	}
 
 	//Method will be in charge of bird physics
@@ -67,7 +62,6 @@ public class Bird extends GraphicsProgram {
 		p.birdPhysics();
 		g.changeFloatLocation(p.getX(), p.getY());
 		bounds.setLocation((int)p.getX(),(int) p.getY());
-		//System.out.println("BIRD PHYSICS BOUNDS: " + bounds);
 	}
 	
 	public float birdGetX() {
@@ -75,7 +69,6 @@ public class Bird extends GraphicsProgram {
 	}
 	
 	public float birdGetY() {
-		//System.out.println("Y VALUE: " + p.y);
 		return p.y;
 	}
 	
@@ -121,19 +114,3 @@ public Rectangle getBirdBottom() {
 	
 	
 }
-	
-	
-	
-
-	// resetBirdLocation() will reset the bird's location to original
-	/*public void resetBirdLocation() {
-		x = WINDOW_HEIGHT / 2;
-		y = WINDOW_WIDTH / 2;
-		xspeed = yspeed = 0;
-	}*/
-	
-	
-	
-
-	
-

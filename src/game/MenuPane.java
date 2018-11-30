@@ -21,6 +21,7 @@ public class MenuPane extends GraphicsPane {
 		program = app;
 		menuBox.setFillColor(Color.WHITE);
 		menuBox.setFilled(true);
+		
 		for (int i = 0; i < 5; i++) 
 		{
 			GLabel label = new GLabel(glabelStrings[i], (MainApplication.WINDOW_WIDTH / 2) - 180, 200 + 70 * i);
