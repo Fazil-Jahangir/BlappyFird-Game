@@ -100,15 +100,23 @@ public class GameTest extends GraphicsPane implements ActionListener {
 
         if (e.getSource() == scoreTimer) {
             if (gameEnded != false) {
-            	if (scoreDisplayed == true && score % 6 == 0) {
+            	if (scoreDisplayed == true && score % 6 == 0) 
+            	{
                 	pipes.increasePipeSpeed();
                 	pipeSpawn -= 10;
-                	audio.playSound("sounds", "sfx_point1.5.wav", false);
-                    removeScoreDisplay();                    
+                	if(MainApplication.isGameSoundOn) 
+                	{
+                		audio.playSound("sounds", "sfx_point1.5.wav", false);
+                	}
+                	removeScoreDisplay();
                 }
-            	else if (scoreDisplayed == true) {
-            		audio.playSound("sounds", "sfx_point1.5.wav", false);
-                    removeScoreDisplay();
+            	else if (scoreDisplayed == true) 
+            	{
+            		if(MainApplication.isGameSoundOn) 
+            		{
+            			audio.playSound("sounds", "sfx_point1.5.wav", false);
+            		}
+            		removeScoreDisplay();
                 }                
                 scoreManager();
             }
@@ -125,7 +133,10 @@ public class GameTest extends GraphicsPane implements ActionListener {
             bird.birdJump();
             if(endGameChecker == false)
             {
-            	audio.playSound("sounds", "sfx_wing1.6.wav", false);
+            	if(MainApplication.isGameSoundOn)
+            	{
+            		audio.playSound("sounds", "sfx_wing1.6.wav", false);
+            	}
             }            	
         }
 
@@ -280,7 +291,10 @@ public class GameTest extends GraphicsPane implements ActionListener {
     }
 
     public void endGame() {
-    	audio.playSound("sounds", "sfx_hit.wav", false);  
+    	if(MainApplication.isGameSoundOn) 
+		{
+    		audio.playSound("sounds", "sfx_hit.wav", false);
+		}
         System.out.println("	endGame() called\n");
         gameEnded = true;
         endGameChecker = true;

@@ -23,7 +23,6 @@ public class Instructions extends GraphicsPane {
 	
 	public Instructions(MainApplication app) {
 		program = app;
-		
 		setEsc();
 		setTitle();
 		setInstructions();

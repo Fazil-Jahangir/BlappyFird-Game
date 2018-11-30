@@ -1,6 +1,9 @@
 package game;
 
+import java.awt.Color;
+
 import acm.graphics.GImage;
+import acm.graphics.GObject;
 import game.AudioPlayer;
 
 public class MainApplication extends GraphicsApplication {
@@ -14,7 +17,8 @@ public class MainApplication extends GraphicsApplication {
 	public static final int BUTTON_HEIGHT = 250;
 	public static final int BUTTON_WIDTH = 50;
 	
-	public static boolean isSoundOn = true;
+	public static boolean isLobbySoundOn = true;
+	public static boolean isGameSoundOn = true;
 
 	private MenuPane menuPane;
 	private StorePane storePane;
@@ -39,7 +43,7 @@ public class MainApplication extends GraphicsApplication {
 
 	public void switchToMenu() {
 		AudioPlayer audio = AudioPlayer.getInstance();
-		if (isSoundOn) {
+		if (isLobbySoundOn) {
 			audio.playSound("sounds", "menuBeat.wav");
 		}
 		switchToScreen(menuPane);
@@ -66,4 +70,17 @@ public class MainApplication extends GraphicsApplication {
 		AudioPlayer audio = AudioPlayer.getInstance();
 		audio.stopSound("sounds", "menuBeat.wav");
 	}		
+	
+	public static void highlightsButton(GButton button, GObject obj, int r, int g, int b) {
+		Color highlightColor = new Color(r, g, b);
+		if (obj == button)
+			button.setFillColor(highlightColor);
+		else {
+			if (r == 220)
+				button.setFillColor(Color.RED);
+			else {
+				button.setFillColor(Color.GREEN);
+			}
+		}
+	}
 }
