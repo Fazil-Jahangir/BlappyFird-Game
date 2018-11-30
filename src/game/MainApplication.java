@@ -15,6 +15,7 @@ public class MainApplication extends GraphicsApplication {
 	private StorePane storePane;
 	private SettingsPane settingsPane;
 	private GameTest gamePane;
+	private Instructions instructions;
 
 	public static GImage background = new GImage("menu.png", 0, 0);
 
@@ -27,6 +28,7 @@ public class MainApplication extends GraphicsApplication {
 		storePane = new StorePane(this);
 		settingsPane = new SettingsPane(this);
 		gamePane = new GameTest(this);
+		instructions = new Instructions(this);
 		switchToScreen(menuPane);
 	}
 
@@ -45,4 +47,9 @@ public class MainApplication extends GraphicsApplication {
 	public void switchToGame() {
 		switchToScreen(gamePane);
 	}
+	
+	public void switchToInstructions() {
+		switchToScreen(instructions);
+	}
+		
 }

@@ -23,7 +23,7 @@ public class Bird extends GraphicsProgram {
 	public static Rectangle bounds;
 
 
-
+	
 	
 	public Bird(MainApplication app) {
 		program = app;
@@ -32,6 +32,7 @@ public class Bird extends GraphicsProgram {
 		bounds = new Rectangle((int)p.x, (int)p.y, 70, 86);
 		
 	}
+	
 	
 	public void drawBird() {
 		g.draw(program);
@@ -87,6 +88,8 @@ public class Bird extends GraphicsProgram {
 	public Rectangle getBounds() {
 		return bounds;
     }
+
+
 	
 	
 	/*public Rectangle getBirdTop() {

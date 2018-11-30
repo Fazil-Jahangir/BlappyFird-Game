@@ -62,7 +62,7 @@ public class MenuPane extends GraphicsPane {
 			program.switchToGame();
 		}
 		if (obj == gLabel.get(1)) {
-			// program.switchToSettings();
+			program.switchToInstructions();
 		}
 		if (obj == gLabel.get(2)) {
 			program.switchToStore();
