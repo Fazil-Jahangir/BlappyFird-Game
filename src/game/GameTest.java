@@ -87,7 +87,7 @@ public class GameTest extends GraphicsPane implements ActionListener {
                 scrollingBackground();
 
                 // Checks if the bird hits the ground
-                if (bird.birdGetY() >= WINDOW_HEIGHT || pipes.movePipeImages()) {
+                if (bird.birdGetY() >= WINDOW_HEIGHT || pipes.movePipeImages() || bird.birdGetY() < 0) {
                     System.out.println("\nCOLLISION DETECTED! @ Bottom of screen... calling endGame() now");
                     endGame();
                 }
