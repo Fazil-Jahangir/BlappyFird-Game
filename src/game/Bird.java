@@ -6,6 +6,8 @@ import acm.program.GraphicsProgram;
 
 /*
  * The Bird class will be in charge of the bird's behavior and graphics
+ * TODO
+ * Make another enum class to choose different skins. *DO LATER*
  */
 public class Bird extends GraphicsProgram {
 	/**

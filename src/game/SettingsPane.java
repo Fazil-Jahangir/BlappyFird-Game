@@ -11,7 +11,6 @@ import acm.graphics.GObject;
 
 public class SettingsPane extends GraphicsPane {
 	private MainApplication program;
-	
 	private GImage settingsImage = new GImage("settings.png", 0, 0);
 	private GLabel settingsLabel = new GLabel("Settings", 300, 100);
 	private GButton musicButton = new GButton("On", 140, 270, MainApplication.BUTTON_HEIGHT, MainApplication.BUTTON_WIDTH, Color.GREEN);

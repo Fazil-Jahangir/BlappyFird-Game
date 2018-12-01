@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>TestingBird</name>
+	<name>birdRedo2</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -14,11 +14,4 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>media/escape.png</name>
-			<type>1</type>
-			<location>/Users/ChrisKith/git/group-project-osvaldo-s-sons/media/escape.png</location>
-		</link>
-	</linkedResources>
 </projectDescription>
