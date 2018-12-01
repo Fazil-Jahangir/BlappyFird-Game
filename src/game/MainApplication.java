@@ -1,6 +1,7 @@
 package game;
 
 import java.awt.Color;
+import java.io.IOException;
 
 import acm.graphics.GImage;
 import acm.graphics.GObject;
@@ -25,6 +26,7 @@ public class MainApplication extends GraphicsApplication {
 	private SettingsPane settingsPane;
 	private GameTest gamePane;
 	private Instructions instructions;
+	private LeaderboardsPane leaderboardsPane;
 
 	public static GImage background = new GImage("menu.png", 0, 0);
 
@@ -38,6 +40,12 @@ public class MainApplication extends GraphicsApplication {
 		settingsPane = new SettingsPane(this);
 		gamePane = new GameTest(this);
 		instructions = new Instructions(this);
+		try {
+			leaderboardsPane = new LeaderboardsPane(this);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		switchToMenu();
 	}
 
@@ -53,6 +61,10 @@ public class MainApplication extends GraphicsApplication {
 		switchToScreen(storePane);
 	}
 
+	public void switchToLeaderboards() {
+		switchToScreen(leaderboardsPane);
+	}
+	
 	public void switchToSettings() {
 		switchToScreen(settingsPane);
 	}

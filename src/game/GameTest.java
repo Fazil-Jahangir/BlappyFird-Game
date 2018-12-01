@@ -7,20 +7,25 @@ package game;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.*;
-
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import javax.swing.Timer;
-
 import acm.graphics.*;
 import game.AudioPlayer;
+import acm.graphics.GLabel;
 
 public class GameTest extends GraphicsPane implements ActionListener {
 
     private static final int WINDOW_HEIGHT = 535;
     private static final int WINDOW_WIDTH = 1000;
 
+    private static int score = 0;    
     private int NUMTIME = 0;
-    private int backgroundSpeed = 2;
-    private int score;
+    private int backgroundSpeed = 2;    
     private int oneSecond = (1000 / 60);
     private int pipeSpawn = 50;
     
@@ -47,6 +52,8 @@ public class GameTest extends GraphicsPane implements ActionListener {
     private GButton exitToMainMenuButton;
     
     private AudioPlayer audio;
+    
+    private File leaderboardsFile = new File("Leaderboards.txt");
 
     public GameTest(MainApplication app) {
         program = app;
@@ -176,23 +183,6 @@ public class GameTest extends GraphicsPane implements ActionListener {
             restartGame();
             program.switchToMenu();
         }
-
-    }
-
-    public void mouseReleased() {
-
-    }
-
-    public void mouseClicked() {
-
-    }
-
-    public void mouseEntered() {
-
-    }
-
-    public void mouseExited() {
-
     }
 
     @Override
@@ -239,11 +229,27 @@ public class GameTest extends GraphicsPane implements ActionListener {
 
         scoreDisplayed = true;
     }
+    
+    public static int getScore() 
+    {
+		return score;
+	}
 
     public void removeScoreDisplay() {
         program.remove(scoreDisplay);
         scoreDisplayed = false;
     }
+    
+    public void writeScoreToFile() throws IOException {
+		if (endGameChecker == true) 
+		{
+			FileOutputStream a = new FileOutputStream(leaderboardsFile, true);
+			try (Writer writer = new BufferedWriter(new OutputStreamWriter(a, "utf-8"))) {
+				writer.write(String.valueOf(GameTest.getScore() + "\n"));
+				writer.close();
+			}
+		}
+	}
 
     /*
      * Helper method which displays "Press spacebar to begin"
@@ -298,6 +304,12 @@ public class GameTest extends GraphicsPane implements ActionListener {
         System.out.println("	endGame() called\n");
         gameEnded = true;
         endGameChecker = true;
+        
+        try {
+        	writeScoreToFile();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 
         // Add end game label
         endGameLabel = new GLabel("GAME ENDED!", WINDOW_WIDTH / 2 - 100, WINDOW_HEIGHT / 2 - 50);

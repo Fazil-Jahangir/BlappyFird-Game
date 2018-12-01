@@ -13,7 +13,7 @@ public class MenuPane extends GraphicsPane {
 
 	private static GRect menuBox = new GRect(0, 157, 1000, 60);
 
-	private String[] glabelStrings = { "Start Game", "Instructions", "Store", "Settings", "Quit" };
+	private String[] glabelStrings = { "Start Game", "Instructions", "Leaderboards", "Settings", "Quit" };
 	private ArrayList<GLabel> gLabel = new ArrayList<GLabel>();
 
 	public MenuPane(MainApplication app) 
@@ -64,7 +64,7 @@ public class MenuPane extends GraphicsPane {
 			program.switchToInstructions();
 		}
 		if (obj == gLabel.get(2)) {
-			program.switchToStore();
+			program.switchToLeaderboards();
 		}
 		if (obj == gLabel.get(3)) {
 			program.switchToSettings();
